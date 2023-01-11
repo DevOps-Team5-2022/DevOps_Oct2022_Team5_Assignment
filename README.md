@@ -12,3 +12,5 @@ DevOps 2022 Assignment Repo for Team 5
 - Monitoring strategy
 - Metrics for passing or failing
 - Naming convention
+Function: lower case with underscore for spaces. Eg. def hello_world
+Variable: camel case, do not use short forms unless it is universal understanding. Give the variable adjective if possible.
