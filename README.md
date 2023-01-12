@@ -15,7 +15,7 @@ DevOps 2022 Assignment Repo for Team 5
 3. Monitoring and measuring of the change process, keeping a close eye on potential problems, and address any issues that might arise from it.
 4. Testing changes in the product to avoid problems that might arise from it and to prevent poor user experience.
 ### Deployment strategy
-## Canary Deployments
+#### Canary Deployments
 Canary Deployments are those that new instances is tested before all the old instances are replaced. If the readiness check never succeeeds, the canary instance is removed and the deployment configuration will be automatically cancelled and goes back to the old instance. The readiness check is part of the application code where automatic testing will be done to check if the new instance is ready to be used.
 ### Delivery strategy
 1. A new branch of the main branch will be created every sprint, where all the user stories/tasks for that sprint has to be done before merging back into Main branch
