@@ -31,7 +31,10 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git tag
-          git checkout main test.py
+          git checkout main
+          ls
+          git checkout yamlTesting
+          git add test.py
           
       - name: list our contents
         run: |
