@@ -1,6 +1,14 @@
 # DevOps_Oct2022_Team5_Assignment
 DevOps 2022 Assignment Repo for Team 5
 
+### Team Roles & Responsibilies
+|Role|Member|Role Responsibilities|
+--- | --- | ---|
+|Scrum Master & QA|Kevin|Organize the team, does SCRUM & Sprint documentation|
+|Lead Developer|Elgin|Manages the code for the team, is the gatekeeper for releases|
+|Quality Assurance|Samuel|Manages the system testing and overall completness of unit tests and automated testing|
+|Developer|Tricia|Manages the overall development of the solution. Writes unit test cases|
+|Developer|Jun Jie|Manages the overall development of the solution Writes unit test cases|
 
 ### Requirements gathering flow
 ### Backlog issues creation flow
