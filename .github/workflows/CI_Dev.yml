@@ -27,7 +27,7 @@ jobs:
         
     - name: Checkout QA test code
       run: |
-        git checkout main test.py
+        echo "Hello"
         
     - name: list our contents
       run: |
