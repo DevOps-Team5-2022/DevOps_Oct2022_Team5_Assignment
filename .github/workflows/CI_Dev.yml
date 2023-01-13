@@ -36,7 +36,7 @@ jobs:
 
           git tag
 
-          git restore --source main -- test.py
+          git checkout main -- test.py
       - name: list our contents
         run: |
           ls
