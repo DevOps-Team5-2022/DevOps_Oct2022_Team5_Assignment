@@ -22,7 +22,7 @@ jobs:
     - name: Checkout own repo
       uses: actions/checkout@v2
       with:
-        fetch-depth: '1'
+        fetch-depth: '0'
         
     - name: git
       run: |
@@ -32,7 +32,7 @@ jobs:
         git config user.email "<>"
         git status
         git tag
-        git checkout master
+        git checkout main
         
     - name: list our contents
       run: |
