@@ -19,22 +19,19 @@ jobs:
       run: |
         pip install flake8 pytest pytest-cov
 
-    - name: Checkout Dev Branch
-      uses: actions/checkout@v3
+    - name: Git checkout
+      uses: actions/checkout@v2
       with:
-        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
-        ref: yamlTesting    
-        
-    - name: Adding git
+        fetch-depth: '0'
+    - name: git
       run: |
-        # setup the username and email. 
+        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
         git --version
-        git config user.name DevOps-Team5-2022
-        git config user.email killmyselfdevops@gmail.com
-
-    - name: Checkout QA test code
-      run: |
-        git checkout main test.py
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git status
+        git tag
+        git describe
         
     - name: list our contents
       run: |
