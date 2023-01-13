@@ -31,7 +31,9 @@ jobs:
         git config user.email "<>"
         git status
         git tag
-        git checkout main test.py
+        git checkout main
+        git checkout test.py
+        git checkout yamlTesting
         
     - name: list our contents
       run: |
