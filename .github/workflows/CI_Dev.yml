@@ -1,10 +1,12 @@
 name: CI for Hello World
 
 on: 
-  [push,pull_request]:
+  push:
     branches:
       - yamlTesting
-    
+  pull_request_target:
+    branches:
+      - sprint
     
 jobs:
   build:
@@ -17,6 +19,13 @@ jobs:
       run: |
         pip install flake8 pytest pytest-cov
     - name: Checkout Own Repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
+        ref: main, yamlTesting
+    - name: list our contents
+      run: |
+        ls
+    - name: test with pytest
+      run: |
+        pytest test.py -v -cov --junitxml=report.xml
