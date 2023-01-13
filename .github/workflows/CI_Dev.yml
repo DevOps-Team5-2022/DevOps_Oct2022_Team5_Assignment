@@ -19,10 +19,6 @@ jobs:
       run: |
         pip install flake8 pytest pytest-cov
 
-    - name: Git checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: '0'
     - name: git
       run: |
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -31,9 +27,7 @@ jobs:
         git config user.email "<>"
         git status
         git tag
-        git checkout main
-        git checkout test.py
-        git checkout yamlTesting
+        git checkout main test.py
         
     - name: list our contents
       run: |
