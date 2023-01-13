@@ -27,10 +27,10 @@ jobs:
         
     - name: Adding git
       run: |
-        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+        # setup the username and email. 
         git --version
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
+        git config user.name DevOps-Team5-2022
+        git config user.email killmyselfdevops@gmail.com
 
     - name: Checkout QA test code
       run: |
