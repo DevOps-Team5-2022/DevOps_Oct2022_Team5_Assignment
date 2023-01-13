@@ -1,39 +1,42 @@
+---
 name: CI for Hello World
-
-on: 
+on:
   push:
     branches:
       - yamlTesting
   pull_request_target:
     branches:
       - sprint
-    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.11
-    - name: Install Libraries
-      run: |
-        pip install flake8 pytest pytest-cov
-        
-    - name: Checkout own repo
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: '0'
-        
-    - name: git
-      run: |
-        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-        git --version
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-        git status
-        git tag
-        git restore --source main -- test.py
-        
-    - name: list our contents
-      run: |
-        ls
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Install Libraries
+        run: |
+          pip install flake8 pytest pytest-cov
+      - name: Checkout own repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+      - name: git
+        run: >
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no
+          email by default
+
+          git --version
+
+          git config user.name "GitHub Actions Bot"
+
+          git config user.email "<>"
+
+          git status
+
+          git tag
+
+          git checkout main -- test.py
+      - name: list our contents
+        run: |
+          ls
