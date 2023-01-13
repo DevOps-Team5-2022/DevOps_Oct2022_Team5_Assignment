@@ -18,11 +18,16 @@ jobs:
     - name: Install Libraries
       run: |
         pip install flake8 pytest pytest-cov
-    - name: Checkout Own Repo
+    - name: Checkout QA Branch
       uses: actions/checkout@v3
       with:
         repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
-        ref: main, yamlTesting
+        ref: main
+    - name: Checkout Dev Branch
+      uses: actions/checkout@v3
+      with:
+        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
+        ref: yamlTesting     
     - name: list our contents
       run: |
         ls
