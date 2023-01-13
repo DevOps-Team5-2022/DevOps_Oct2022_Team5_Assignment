@@ -19,12 +19,7 @@ jobs:
       run: |
         pip install flake8 pytest pytest-cov
         
-    - name: Checkout Own Repo
-      uses: actions/checkout@v2
-      with:
-        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
-        
-    - name: Git checkout
+    - name: Checkout own repo
       uses: actions/checkout@v2
       with:
         fetch-depth: '1'
@@ -33,6 +28,3 @@ jobs:
     - name: list our contents
       run: |
         ls
-    - name: test with pytest
-      run: |
-        pytest test.py -v -cov --junitxml=report.xml
