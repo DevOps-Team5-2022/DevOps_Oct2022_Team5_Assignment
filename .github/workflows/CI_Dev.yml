@@ -1,0 +1,22 @@
+name: CI for Hello World
+
+on: 
+  [push,pull_request]:
+    branches:
+      - yamlTesting
+    
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+    - name: Install Libraries
+      run: |
+        pip install flake8 pytest pytest-cov
+    - name: Checkout Own Repo
+      uses: actions/checkout@v2
+      with:
+        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
