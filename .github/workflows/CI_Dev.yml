@@ -32,6 +32,7 @@ jobs:
         git config user.email "<>"
         git status
         git tag
+        git checkout master
         
     - name: list our contents
       run: |
