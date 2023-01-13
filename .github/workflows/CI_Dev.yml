@@ -31,7 +31,7 @@ jobs:
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
         git status
-        git checkout main
+        git checkout "main"
         
     - name: list our contents
       run: |
