@@ -30,7 +30,7 @@ jobs:
         git --version
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
-        git checkout origin/main -- test.py
+        git checkout main
         
     - name: list our contents
       run: |
