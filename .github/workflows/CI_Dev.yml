@@ -23,7 +23,11 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
-
+        
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
     - name: git
       run: |
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -31,7 +35,7 @@ jobs:
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
         git status
-        git checkout "main"
+        git checkout "main" -- test.py
         
     - name: list our contents
       run: |
