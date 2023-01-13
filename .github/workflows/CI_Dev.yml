@@ -18,6 +18,11 @@ jobs:
     - name: Install Libraries
       run: |
         pip install flake8 pytest pytest-cov
+        
+    - name: Checkout Own Repo
+      uses: actions/checkout@v2
+      with:
+        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
 
     - name: git
       run: |
@@ -27,7 +32,7 @@ jobs:
         git config user.email "<>"
         git status
         git tag
-        git checkout main test.py
+        git checkout main -- test.py
         
     - name: list our contents
       run: |
