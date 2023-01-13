@@ -4,10 +4,16 @@ DevOps 2022 Assignment Repo for Team 5
 
 ### Requirements gathering flow
 ### Backlog issues creation flow
+#### New Task/Enhancement to be done
 - Create a new issue (Task) with reasonable naming sense
 - Include the label "Enhancement". Add Milestone related to issue eg. upload data
 - Assign the issue to whoever will be completing or wants to complete the task. Refer to Trello if needed
 - Add the description of what the issue is supposed to be
+#### New bug discovered
+- Create a new issue with reasonable naming sense
+- Include the "Bug"
+- Assign the issue to who "developed" the bug
+- If help is required assign tech lead to bug also.
 ### Git usage strategy
 ### Change requirement strategy
 1. Leverage the Change Requirement Timeline which are our sprints. Before we change, make sure that everyone that is affected by the change know about it and to set and communicate goals to relate directly to the change of requirement.
