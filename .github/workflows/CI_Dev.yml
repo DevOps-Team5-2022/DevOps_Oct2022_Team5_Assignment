@@ -28,9 +28,9 @@ jobs:
 
           git --version
 
-          git config user.name Villicus-np
+          git config user.name "Villicus-np"
 
-          git config user.email kevinkhew01@gmail.com
+          git config user.email "kevinkhew01@gmail.com"
 
           git status
 
