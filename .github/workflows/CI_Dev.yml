@@ -14,29 +14,25 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.11
+          
       - name: Install Libraries
         run: |
           pip install flake8 pytest pytest-cov
+          
       - name: Checkout own repo
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
+          
       - name: git
         run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no
-          email by default
-
           git --version
-
           git config user.name "Villicus-np"
-
           git config user.email "kevinkhew01@gmail.com"
-
           git status
-
           git tag
-
-          git checkout main -- test.py
+          # git checkout main -- test.py
+          
       - name: list our contents
         run: |
           ls
