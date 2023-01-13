@@ -52,5 +52,5 @@ Communication outside of sprint planning & retrospective will be done through te
 - The number of test satisfied per push should increase over time.
 - This ensures that the development of the program is functional.
 ### Naming convention
-Function: lower case with underscore for spaces. Eg. def hello_world
-Variable: camel case, do not use short forms unless it is universal understanding. Give the variable adjective if possible.
+- Function: lower case with underscore for spaces. Eg. def hello_world
+- Variable: camel case, do not use short forms unless it is universal understanding. Give the variable adjective if possible.
