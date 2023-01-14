@@ -5,7 +5,7 @@ on:
       - yamlTesting
   pull_request_target:
     branches:
-      - yamlTesting
+      - sprint
 jobs:
   build:
     runs-on: windows-latest
@@ -14,17 +14,16 @@ jobs:
         with:
           python-version: 3.11
           
-      - name: Install dependencies
+					
+			- name: Install libraies
 				run: |
 					pip install flake8 pytest pytest-cov
 		  
-      - name: Checkout repo
+      - name: Checkout own repo
         uses: actions/checkout@v3
         with:
           fetch-depth: "0"
-      - name: Install Git
-        run: sudo apt-get install git    
-        
+          
       - name: git
         run: |
           git --version
@@ -32,7 +31,8 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git tag
-          git checkout main -- test.py
+          #git fetch origin main test.py
+          git checkout main test.py
 
       - name: list our contents
         run: |
