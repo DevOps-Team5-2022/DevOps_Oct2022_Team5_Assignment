@@ -32,6 +32,7 @@ jobs:
           git status
           git tag
           #git fetch origin main test.py
+          git checkout main test.py
           
           
       - name: list our contents
