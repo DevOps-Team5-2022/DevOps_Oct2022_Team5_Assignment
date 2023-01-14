@@ -20,7 +20,7 @@ jobs:
           pip install flake8 pytest pytest-cov
           
       - name: Checkout own repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: "0"
           
@@ -31,10 +31,8 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git tag
-          git checkout main
-          ls
-          git checkout yamlTesting
-          git add test.py
+          git fetch origin main
+          git checkout main test.py
           
       - name: list our contents
         run: |
