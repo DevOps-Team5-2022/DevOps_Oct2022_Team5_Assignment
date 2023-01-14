@@ -10,17 +10,14 @@ jobs:
     steps:
     - uses: actions/setup-python@v2
       with:
-        python-version: 3.8
-				
+        python-version: 3.8		
     - name: Install Libraries
       run: |
-        python -m pip install --upgrade pip
-				
+        python -m pip install --upgrade pip				
     - name: Checkout Own Repo
       uses: actions/checkout@v3
       with:
-        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
-				
+        repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment				
     - name: list our contents
       run: |
         ls
