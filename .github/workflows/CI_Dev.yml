@@ -31,7 +31,8 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git tag
-          git fetch origin main test.py
+          #git fetch origin main test.py
+          
           
       - name: list our contents
         run: |
