@@ -1,35 +1,39 @@
-name: Test
-
+name: CI for Hello World
 on:
   push:
     branches:
-    - yamlTesting
-  pull_request:
+      - yamlTesting
+  pull_request_target:
     branches:
-    - yamlTesting
-
+      - yamlTesting
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: windows-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ref: yamlTesting
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+          
+      - name: Install Libraries
+        run: |
+          pip install flake8 pytest pytest-cov
+		  
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: "0"
+      - name: Install Git
+        run: sudo apt-get install git    
         
-    - name: Use Python 3.11
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.11
+      - name: git
+        run: |
+          git --version
+          git config user.name "Villicus-np"
+          git config user.email "kevinkhew01@gmail.com"
+          git status
+          git tag
+          git checkout main -- test.py
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest flake8
-        
-    - name: Extract test.py from main branch
-      run: git checkout main -- path/to/test.py
-      
-    - name: Run tests
-      run: pytest path/to/test.py
+      - name: list our contents
+        run: |
+          ls
