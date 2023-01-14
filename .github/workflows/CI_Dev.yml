@@ -27,9 +27,10 @@ jobs:
           git config user.name "Villicus-np"
           git config user.email "kevinkhew01@gmail.com"
           git status
-          git tag
-          #git fetch origin main test.py
-          git checkout main test.py
+          git branch -a
+          git remote -v 
+          git log
+          
       - name: list our contents
         run: |
           ls
