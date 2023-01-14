@@ -21,17 +21,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: "0"          
-      - name: git
+      - name: get QA Pytest
         run: |
           git --version
           git config user.name "Villicus-np"
           git config user.email "kevinkhew01@gmail.com"
           git status
-          git checkout remotes/origin/main test.py
+          git checkout remotes/origin/main QA_Test.py
           
       - name: list our contents
         run: |
           ls
-      - name: test with pytest
+      - name: Test QA's script
         run: |
-          pytest test.py -v -cov --junitxml=report.xml
+          pytest QA_Test.py -v -cov --junitxml=report.xml
+          
+      - name: Test Dev's script
+        run: |
+          pytest Dev_Test.py -v -cov --junitxml=report.xml
