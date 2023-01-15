@@ -11,6 +11,7 @@ DevOps 2022 Assignment Repo for Team 5
 |Developer|Jun Jie|Manages the overall development of the solution Writes unit test cases|
 
 ### Requirements gathering flow
+Go through the project scope as a team. Identify areas which will require IT to develop. From the areas break it down to what are the technologies required and its dependencies. Once all is identified the team will generate user stories for the requirements and planning poker will start.
 ### Backlog issues creation flow
 #### New Task/Enhancement to be done
 1. Create a new issue (Task) with reasonable naming sense
@@ -23,6 +24,17 @@ DevOps 2022 Assignment Repo for Team 5
 3. Assign the issue to who "developed" the bug
 4. If help is required assign tech lead to bug also.
 ### Git usage strategy
+#### Branches
+1. main - to store code that is awaiting released or released already.
+2. sprintBranch - To store code that is being developed for each sprint.
+3. QABranch - Code that is written by QA
+4. DevBranch - Code that is written by Dev.
+#### Usage strategy
+QA and Dev will push their code to their respective branches. If QA pushes code through, a CI will run to test QA's code and pull Dev's functions to be tested also, vice versa if Dev push first. In the event that the CI fails, notify the pusher if their code failed or notify Devs if function test failed, code does not enter branch if their own test fails. If Dev function test fails notify Devs. 
+
+Once CI passes pull request from QA/Dev branch into sprint branch.
+
+From Sprint branch at the end of every sprint, Tech Lead/Scrum Master will do a pull request into main branch where automatic tagging will happen. A CDelivery will be triggered and notify the team of the changes. Manual deployment(release) will be done and manual notifying of Owner and team is handled.
 ### Change requirement strategy
 1. Leverage the Change Requirement Timeline which are our sprints. Before we change, make sure that everyone that is affected by the change know about it and to set and communicate goals to relate directly to the change of requirement.
 2. Communicate the reason of why there is a need for change of requirements and to be truthful about why it has to be done. There should also be explaination in why this change would result in better end goal.
