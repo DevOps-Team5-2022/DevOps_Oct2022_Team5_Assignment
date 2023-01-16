@@ -24,14 +24,7 @@ jobs:
       - name: Test Dev's script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=devReportDevCode.xml
-      - if: failure()
-        uses: JasonEtco/create-an-issue@v2.9.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE.md
-          update_existing: true
-          search_existing: all
+      
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
@@ -55,7 +48,15 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: dev-dev-report
-
+          
+      - if: failure()
+        uses: JasonEtco/create-an-issue@v2.9.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE.md
+          update_existing: true
+          search_existing: all
   testQACode:
     needs: testDevCode
     runs-on: ubuntu-latest
