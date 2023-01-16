@@ -1,11 +1,7 @@
 name: CI for Dev
 on:
-  push:
-    branches:
-      - yamlTesting
-  pull_request_target:
-    branches:
-      - sprint
+  pull_request:
+  
 jobs:
   testDevCode:
     build:
@@ -33,7 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: .github/missingFeatures.md
+          filename: .github/ISSUE_Template.md
           update_existing: true
           search_existing: all
   testQACode:
@@ -74,7 +70,3 @@ jobs:
           filename: .github/missingFeatures.md
           update_existing: true
           search_existing: all
-
-      - name: Push to Dev Branch
-        if: success()
-        run: git push origin dev
