@@ -1,4 +1,4 @@
-name: CI for Hello World
+name: Testing Issue creation
 
 on:
   push:
