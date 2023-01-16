@@ -1,4 +1,4 @@
-name: CI for Hello World
+name: CI for Dev - QA Testing
 on:
   push:
     branches:
@@ -35,7 +35,6 @@ jobs:
       - name: Test QA's script
         run: |
           pytest QA_Test.py -v -cov --junitxml=report.xml
-        #continue-on-error: true        
       - if: failure()
         uses: JasonEtco/create-an-issue@v2.9.1
         env:
@@ -44,19 +43,7 @@ jobs:
           filename: .github/missingFeatures.md
           update_existing: true
           search_existing: all
-          
-      - name: Test Dev's script
-        run: |
-          pytest Dev_Test.py -v -cov --junitxml=report.xml
-      
-      - if: ${{ failure() }}
-        uses: JasonEtco/create-an-issue@v2.9.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE.md
-          update_existing: true
-          search_existing: all
+
 
       - name: Push to Dev Branch
         if: success()
