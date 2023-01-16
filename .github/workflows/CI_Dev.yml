@@ -16,6 +16,7 @@ jobs:
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
+          repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
           fetch-depth: "0"          
       - name: list our contents
         run: |
