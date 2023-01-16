@@ -37,7 +37,7 @@ jobs:
           pytest QA_Test.py -v -cov --junitxml=report.xml
       
       - if: ${{ failure() }}
-        uses: JasonEtco/create-an-issue@v2
+        uses: JasonEtco/create-an-issue@v2.9.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -46,12 +46,7 @@ jobs:
       - name: Test Dev's script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=report.xml
-      - if: ${{ failure() }}
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE.md
+
       - name: Push to Dev Branch
         if: success()
         run: git push origin dev
