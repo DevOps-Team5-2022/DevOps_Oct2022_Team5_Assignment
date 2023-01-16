@@ -43,6 +43,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/missingFeatures.md
+          update_existing: true
+          search_existing: all
           
       - name: Test Dev's script
         run: |
@@ -54,6 +56,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/ISSUE_TEMPLATE.md
+          update_existing: true
+          search_existing: all
 
       - name: Push to Dev Branch
         if: success()
