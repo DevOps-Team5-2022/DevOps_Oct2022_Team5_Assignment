@@ -4,7 +4,6 @@ on:
   
 jobs:
   testDevCode:
-    build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v2
@@ -34,7 +33,6 @@ jobs:
           search_existing: all
   testQACode:
     needs: testDevCode
-    build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v2
