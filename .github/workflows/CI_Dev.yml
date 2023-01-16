@@ -29,7 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: .github/ISSUE_Template.md
+          filename: .github/ISSUE_TEMPLATE.md
           update_existing: true
           search_existing: all
   testQACode:
