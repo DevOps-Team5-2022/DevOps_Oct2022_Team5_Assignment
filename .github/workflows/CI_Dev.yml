@@ -107,6 +107,12 @@ jobs:
         if: always()
         with:
           junit_files: "devReportQACode.xml"
+      
+      - name: create folder & move files
+        if: always()
+        run: |
+          mkdir downloads
+          mv *.xml ./downloads
           
       - name: Upload document
         if: always()
