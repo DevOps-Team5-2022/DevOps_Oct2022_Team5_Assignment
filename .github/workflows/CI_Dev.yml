@@ -37,7 +37,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
-          junit_files: "report.xml"
+          junit_files: "devReportDevCode.xml"
       - name: create folder
         run: mkdir downloads
 
@@ -102,7 +102,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
-          junit_files: "report.xml"
+          junit_files: "devReportQACode.xml"
       - name: create folder
         run: mkdir downloads
 
