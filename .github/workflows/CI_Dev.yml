@@ -24,6 +24,9 @@ jobs:
       - name: Test Dev's script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=devReportDevCode.xml
+          
+      - name: write Test
+        run: echo "Hello World!"
       
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
