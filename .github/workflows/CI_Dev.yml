@@ -31,6 +31,9 @@ jobs:
         with:
           junit_files: "devReportDevCode.xml"
           
+      - name: write Test
+        run: echo "Hello World!"
+          
       - name: Make directory
         run: mkdir -p path/to/artifact
 
