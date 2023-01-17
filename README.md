@@ -64,13 +64,17 @@ For **important** team discussions, the team will communicate through voice call
 
 Communication outside of sprint planning & retrospective will be done through text messages via **Telegram**. **Telegram** will be used to schedule team meetings/discussions and generally any small tdiscussions that aren't big enough to warrant a team discussion on **Microsoft Teams**
 ### Monitoring strategy
-- To monitor progress, we will be using the "Number of lines of code" metric. 
-- Lines of code in source (LOC) is the counting of the number of lines in the program.
-- It will be used to track the estimate effort of the developers.
+- To monitor progress, we will be gauging our metrics for passing or failing with a threshold.
+- Threshold will be a maximum of 3 failures and the end of each sprint.
+- Scrum master will review at every sprint meeting, if threshold exceeds, team is to communicate through Microsoft Teams meeting to decide on a way to decrease the number of failing test cases.
+
 ### Metrics for passing or failing
 - To monitor the passing or failing of test cases, we will be using "Defects per test per push" metric.
 - The number of test satisfied per push should increase over time.
 - This ensures that the development of the program is functional.
+- Developers & QA to track the number of failures and passes when running their test cases each sprint.
+- Scrum Master to review at every sprint meeting.
+
 ### Naming convention
 - Function: lower case with underscore for spaces. Eg. def hello_world
 - Variable: camel case, do not use short forms unless it is universal understanding. Give the variable adjective if possible.
