@@ -32,6 +32,21 @@ jobs:
           filename: .github/ISSUE_TEMPLATE.md
           update_existing: true
           search_existing: all
+      
+      - name: send telegram message on push
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Dev pytest failed
     
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
