@@ -42,8 +42,7 @@ jobs:
           filename: .github/ISSUE_TEMPLATE.md
           update_existing: true
           search_existing: all
-        
-      - if: always()          
+              
       - name: Make directory
         run: mkdir -p path/to/artifact
       - name: Move file
