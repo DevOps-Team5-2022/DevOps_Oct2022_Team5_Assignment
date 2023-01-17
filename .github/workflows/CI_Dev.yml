@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: actions/download-artifact@v2
         with:
-          name: assetDocuments
+          name: devTestResultsDev
       
 
           
@@ -107,21 +107,19 @@ jobs:
         if: always()
         with:
           junit_files: "devReportQACode.xml"
-      - name: create folder
-        run: mkdir downloads
-
-      - name: move files
-        run: mv *.xml ./downloads
-
+          
       - name: Upload document
+        if: always()
         uses: actions/upload-artifact@v2
         with: 
           name: assetDocuments
           path: downloads
       - name: Set environment version
+        if: always()
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: download remote information
+        if: always()
         uses: actions/download-artifact@v2
         with:
-          name: assetDocuments
+          name: devTestResultsQA
       
