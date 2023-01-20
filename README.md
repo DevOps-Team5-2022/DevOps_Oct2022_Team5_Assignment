@@ -1,8 +1,17 @@
 # DevOps_Oct2022_Team5_Assignment
 DevOps 2022 Assignment Repo for Team 5
 
+### Team Roles & Responsibilies
+|Role|Member|Role Responsibilities|
+--- | --- | ---|
+|Scrum Master & QA|Kevin|Organize the team, does SCRUM & Sprint documentation|
+|Lead Developer|Elgin|Manages the code for the team, is the gatekeeper for releases|
+|Quality Assurance|Samuel|Manages the system testing and overall completness of unit tests and automated testing|
+|Developer|Tricia|Manages the overall development of the solution. Writes unit test cases|
+|Developer|Jun Jie|Manages the overall development of the solution Writes unit test cases|
 
 ### Requirements gathering flow
+Go through the project scope as a team. Identify areas which will require IT to develop. From the areas break it down to what are the technologies required and its dependencies. Once all is identified the team will generate user stories for the requirements and planning poker will start.
 ### Backlog issues creation flow
 #### New Task/Enhancement to be done
 1. Create a new issue (Task) with reasonable naming sense
@@ -15,6 +24,33 @@ DevOps 2022 Assignment Repo for Team 5
 3. Assign the issue to who "developed" the bug
 4. If help is required assign tech lead to bug also.
 ### Git usage strategy
+#### Dev Strat
+1. Pull Dev Branch
+2. Create a local branch of Dev Branch
+3. Write code 
+4. Push code to Dev Branch
+#### QA Strat
+1. Pull QA Branch
+2. Create a local branch of QA Branch
+3. Write code 
+4. Push code to QA Branch
+#### Scrum Master & Tech Lead
+1. Pull all branches
+2. Create local branch
+3. Write code to respective branches
+4. Push code
+5. End of each sprint pull request from Sprint to Main. 
+6. Create a tag
+7. Create a release when UAT pass.
+#### Branches
+1. main - to store code that is awaiting released or released already.
+2. sprintBranch - To store code that is being developed for each sprint.
+3. QABranch - Code that is written by QA
+4. DevBranch - Code that is written by Dev.
+#### YAML strategy
+CI seesaw effect will happen between QA and Dev where code is extracted from the opposite branch to test. If the tests are successful it will PR to Sprint Branch.
+PR will run a CI to test the code again and notify the team that a new bunch of code is entering what branch.
+
 ### Change requirement strategy
 1. Leverage the Change Requirement Timeline which are our sprints. Before we change, make sure that everyone that is affected by the change know about it and to set and communicate goals to relate directly to the change of requirement.
 2. Communicate the reason of why there is a need for change of requirements and to be truthful about why it has to be done. There should also be explaination in why this change would result in better end goal.
@@ -44,13 +80,17 @@ For **important** team discussions, the team will communicate through voice call
 
 Communication outside of sprint planning & retrospective will be done through text messages via **Telegram**. **Telegram** will be used to schedule team meetings/discussions and generally any small tdiscussions that aren't big enough to warrant a team discussion on **Microsoft Teams**
 ### Monitoring strategy
-- To monitor progress, we will be using the "Number of lines of code" metric. 
-- Lines of code in source (LOC) is the counting of the number of lines in the program.
-- It will be used to track the estimate effort of the developers.
+- To monitor progress, we will be gauging our metrics for passing or failing with a threshold.
+- Threshold will be a maximum of 3 failures and the end of each sprint.
+- Scrum master will review at every sprint meeting, if threshold exceeds, team is to communicate through Microsoft Teams meeting to decide on a way to decrease the number of failing test cases.
+
 ### Metrics for passing or failing
 - To monitor the passing or failing of test cases, we will be using "Defects per test per push" metric.
 - The number of test satisfied per push should increase over time.
 - This ensures that the development of the program is functional.
+- Developers & QA to track the number of failures and passes when running their test cases each sprint.
+- Scrum Master to review at every sprint meeting.
+
 ### Naming convention
 - Function: lower case with underscore for spaces. Eg. def hello_world
 - Variable: camel case, do not use short forms unless it is universal understanding. Give the variable adjective if possible.
