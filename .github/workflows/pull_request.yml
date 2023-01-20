@@ -1,10 +1,11 @@
 name: pr-labeler
 
-on: [pull_request]
-
+on: 
+  pull_request:
 
 jobs:
-  PR:
+  pullRequest:
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v2
@@ -22,7 +23,7 @@ jobs:
       - name: list our contents
         run: |
           ls
-      - name: Test Dev's script
+      - name: Test script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=ReportDevCode.xml
           pytest QA_Test.py -v -cov --junitxml=ReportQACode.xml
@@ -86,20 +87,19 @@ jobs:
           l_max_size: '1000'
           exclude_files: '.txt'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-       - name: Notify Team for PR
-         uses: appleboy/telegram-action@master
-          with:
-            to: ${{ secrets.TELEGRAM_TO }}
-            token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: |
-              A PULL REQUEST was created.
-              
-              ${{ github.actor }} created commit:
-              Commit message: ${{ github.event.commits[0].message }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+      - name: Notify Team for PR
+        if: always()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            A PULL REQUEST was created.
 
-              Repository: ${{ github.repository }}
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
 
-              See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-              
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
