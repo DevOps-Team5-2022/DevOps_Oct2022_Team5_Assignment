@@ -1,14 +1,10 @@
-name: CI for QA
-on:
-  push:
-    branches:
-      DevBranch
-  pull_request:
-      branches:
-        DevBranch
-  
+name: pr-labeler
+
+on: [pull_request]
+
+
 jobs:
-  testDevCode:
+  PR:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v2
@@ -26,18 +22,10 @@ jobs:
       - name: list our contents
         run: |
           ls
-      - name: get Dev Pytest
-        run: |
-          git --version
-          git config user.name "Villicus-np"
-          git config user.email "kevinkhew01@gmail.com"
-          git status
-          git checkout remotes/origin/yamlTesting Dev_Test.py
-          
       - name: Test Dev's script
         run: |
-          pytest Dev_Test.py -v -cov --junitxml=QAReportDevCode.xml
-          
+          pytest Dev_Test.py -v -cov --junitxml=ReportDevCode.xml
+          pytest QA_Test.py -v -cov --junitxml=ReportQACode.xml
       - if: failure()
         uses: JasonEtco/create-an-issue@v2.9.1
         env:
@@ -60,13 +48,14 @@ jobs:
             Repository: ${{ github.repository }}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            Dev pytest failed
+            Pytest failed
     
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
-          junit_files: "QAReportDevCode.xml"
+          junit_files: |
+            *.xml
       - name: create folder & move files
         if: always()
         run: |
@@ -77,7 +66,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with: 
-          name: QATestResultsDev
+          name: pullRequestDocument
           path: downloads
       - name: Set environment version
         if: always()
@@ -86,5 +75,31 @@ jobs:
         if: always()
         uses: actions/download-artifact@v2
         with:
-          name: QATestResultsDev
-      
+          name: pullRequestDocument
+      - name: Label the PR size
+        if: always()
+        uses: coverwallet/pr-labeler@v1.2.1
+        with:
+          xs_max_size: '10'
+          s_max_size: '100'
+          m_max_size: '500'
+          l_max_size: '1000'
+          exclude_files: '.txt'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+       - name: Notify Team for PR
+         uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              A PULL REQUEST was created.
+              
+              ${{ github.actor }} created commit:
+              Commit message: ${{ github.event.commits[0].message }}
+
+              Repository: ${{ github.repository }}
+
+              See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+              

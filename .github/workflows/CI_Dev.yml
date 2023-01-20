@@ -1,6 +1,11 @@
 name: CI for Dev
 on:
+  push:
+    branches:
+      DevBranch
   pull_request:
+      branches:
+        DevBranch
   
 jobs:
   testDevCode:
