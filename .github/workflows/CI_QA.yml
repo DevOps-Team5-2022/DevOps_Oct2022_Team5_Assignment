@@ -2,10 +2,10 @@ name: CI for QA
 on:
   push:
     branches:
-      DevBranch
+      QABranch
   pull_request:
       branches:
-        DevBranch
+        QABranch
   
 jobs:
   testDevCode:
