@@ -100,4 +100,3 @@ jobs:
           key: code-size
           value: ${{ steps.projectmetrics.outputs.code_size }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      
