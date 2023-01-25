@@ -1,4 +1,3 @@
-Main:
 name: CI for Dev
 on:
   push:
