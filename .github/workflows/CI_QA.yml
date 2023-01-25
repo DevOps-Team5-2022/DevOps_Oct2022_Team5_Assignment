@@ -34,7 +34,7 @@ jobs:
           git config user.name "Villicus-np"
           git config user.email "kevinkhew01@gmail.com"
           git status
-          git checkout remotes/origin/yamlTesting Dev_Test.py
+          git checkout remotes/origin/main Dev_Test.py
           
       - name: Test Dev's script
         run: |
