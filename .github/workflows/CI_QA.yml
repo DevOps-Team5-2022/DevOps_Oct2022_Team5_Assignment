@@ -2,10 +2,10 @@ name: CI for QA
 on:
   push:
     branches:
-      DevBranch
+      QABranch
   pull_request:
       branches:
-        DevBranch
+        QABranch
   
 jobs:
   testDevCode:
@@ -17,7 +17,9 @@ jobs:
       - name: Install Libraries
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-cov		  
+          pip install flake8 pytest pytest-cov
+          pip install selenium-yaml
+          pip install webdriver-manager
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
@@ -32,7 +34,7 @@ jobs:
           git config user.name "Villicus-np"
           git config user.email "kevinkhew01@gmail.com"
           git status
-          git checkout remotes/origin/yamlTesting Dev_Test.py
+          git checkout remotes/origin/main Dev_Test.py
           
       - name: Test Dev's script
         run: |
@@ -44,8 +46,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/ISSUE_TEMPLATE.md
-          update_existing: true
-          search_existing: all
       
       - name: send telegram message on push
         if: failure()
@@ -100,4 +100,3 @@ jobs:
           key: code-size
           value: ${{ steps.projectmetrics.outputs.code_size }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      
