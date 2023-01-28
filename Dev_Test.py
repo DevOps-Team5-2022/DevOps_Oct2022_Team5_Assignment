@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+import main
 
 def test_home_url():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
@@ -48,3 +49,7 @@ def test_settings_url():
     # Check that its at NLB Home Page
     title = driver.title
     assert title == "DevOps Team 5 Settings Page"
+
+def test_check_path_exists():
+    check = main.check_path_exists('C:\Windows')
+    assert check == True
