@@ -18,6 +18,7 @@ jobs:
           pip install selenium
           pip install webdriver-manager
           pip install Flask
+          pip show selenium
       - name: Install Chrome
         run: |
           sudo apt-get update
