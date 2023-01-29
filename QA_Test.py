@@ -24,8 +24,6 @@ def getStudentInfo(studentData):
         students.pop(0)
         return students
 
-Code add
-
 #test if clicking the "Prepare Email" button on the nav bar opens the correct oage
 def test_goToPrepareEmailPage():
     options = Options()
