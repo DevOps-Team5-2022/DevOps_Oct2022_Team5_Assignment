@@ -38,6 +38,12 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Check Chrome version
+        run: chrome --version
+      - name: Check ChromeDriver version
+        run: chromedriver --version
+      - name: Check Selenium version
+        run: python -m selenium -v
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
