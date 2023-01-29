@@ -15,7 +15,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest pytest-cov
-          pip install selenium-yaml
+          pip install selenium
           pip install webdriver-manager
           pip install Flask
       - name: Install Chrome
