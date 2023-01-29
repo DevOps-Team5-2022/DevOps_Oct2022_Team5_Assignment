@@ -25,9 +25,6 @@ jobs:
         with:
           repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
           fetch-depth: "0"          
-      - name: list our contents
-        run: |
-          ls
       - name: get Dev Pytest
         run: |
           git --version
@@ -35,7 +32,10 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git checkout remotes/origin/DevBranch Dev_Test.py
-          
+          git checkout remotes/origin/DevBranch main.py
+      - name: list our contents
+        run: |
+          ls
       - name: Test Dev's script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=QAReportDevCode.xml
