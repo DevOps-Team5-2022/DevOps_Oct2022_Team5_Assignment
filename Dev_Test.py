@@ -2,7 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+import os.path
 import main
+import Email
 
 def test_home_url():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
@@ -51,5 +53,11 @@ def test_settings_url():
     assert title == "DevOps Team 5 Settings Page"
 
 def test_check_path_exists():
-    check = main.check_path_exists('C:\Windows')
+    check = main.check_path_exists('C:\\Windows')
     assert check == True
+
+def test_email_function():
+    Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "C:\\")
+
+    assert os.path.exists("C:\\Tan Jun Jie Internship Email.msg") == True
+    
