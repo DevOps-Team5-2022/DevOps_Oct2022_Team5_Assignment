@@ -18,8 +18,6 @@ jobs:
           pip install selenium
           pip install webdriver-manager
           pip install Flask
-      - name: show selenium
-        run: pip show selenium
       - name: Install Chrome
         run: |
           sudo apt-get update
@@ -44,7 +42,7 @@ jobs:
       - name: Check ChromeDriver version
         run: chromedriver --version
       - name: Check Selenium version
-        run: python -m selenium -v
+        run: pip show selenium
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
