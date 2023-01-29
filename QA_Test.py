@@ -1,5 +1,6 @@
 import selenium
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -13,7 +14,10 @@ print(selenium.__version__)
 
 #test if clicking the "Upload Data" button on the nav bar opens the correct oage
 def test_goToUploadDataPage():
-    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
+        
+    options = Options()
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()),options=options)
 
     driver.get(siteIPAddress + "/Main")
 
