@@ -38,7 +38,7 @@ jobs:
           ls
       - name: Testing Dev's code
         run: |
-          pytest main.py -v -cov --junitxml=QAReportDevCode.xml
+          pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
           
       - if: failure()
         uses: JasonEtco/create-an-issue@v2.9.1
