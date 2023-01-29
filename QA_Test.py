@@ -1,3 +1,4 @@
+import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
@@ -5,6 +6,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port, subdue to changes
 global siteIPAddress, studentDataFileName, studentName, studentID
+
+print(selenium.__version__)
 
 #get student info from student data file:
 def getStudentInfo(studentData):
