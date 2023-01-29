@@ -1,18 +1,29 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port, subdue to changes
 global siteIPAddress, studentDataFileName, studentName, studentID
 siteIPAddress, studentDataFileName = "127.0.0.1:522", "student-data.csv"
-studentName, studentID = "Sean Lim Jie En", "S10201234"
+
+#get student info from student data file:
+def getStudentInfo(studentData):
+    students = []
+    global studentName, studentID
+    with open(studentData, "r") as f:
+        reader = csv.reader(f)
+        for student in reader:
+            students.append(student)
+        # remove the headers from data
+        students.pop(0)
+        return students
 
 #test if clicking the "Upload Data" button on the nav bar opens the correct oage
 def test_goToUploadDataPage():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
 
-    driver.get(siteIPAddress)
+    driver.get(siteIPAddress + "/Main")
 
     #checks if the home pahe is loaded
     title = driver.title
@@ -38,7 +49,7 @@ def test_goToUploadDataPage():
 def test_uploadStudentData():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
 
-    driver.get(siteIPAddress)
+    driver.get(siteIPAddress + "/Main")
 
     #checks if the home pahe is loaded
     title = driver.title
@@ -66,6 +77,8 @@ def test_uploadStudentData():
     #Upload Student Data button is clicked
     upload_student_data_button.send_keys(studentDataFileName)
 
+    studentData = getStudentInfo(studentDataFileName)
+
     #check if the right file is uploaded
     file_upload_message = driver.find_element(by=By.ID, value="upload-student-data-file-message").text
     assert file_upload_message + "File Uploaded:" + studentDataFileName
@@ -91,14 +104,24 @@ def test_uploadStudentData():
     totalRows = student_table.findElements(By.tagName("tr"))
 
     dataFound = False
+    found = [False] * studentDataFileName.count()
     #find the student data, if found, set dataFound to true
-    for row in totalRows:
-        student_name = row.findElements(By.id("student-name"))
-        student_id = row.findElements(By.id("student-id"))
-        #this should be the expected result
-        if student_name == studentName && student_id == studentID:
-            dataFound = True
+    for s in studentData:
+        for row in totalRows:
+            student_name = row.findElements(By.id("student-name"))
+            student_id = row.findElements(By.id("student-id"))
+            #this should be the expected result
+            if (student_name == s[1]) and (student_id == s[0]):
+                index = studentData.index(s)
+                found[index] = True
+
+    for f in found:
+        if f == False:
+            dataFound == False
             break;
+        else:
+            dataFound = True
+    
     if dataFound == False:
         print("Error! Student Data was not uploaded successfully!")
 
@@ -108,7 +131,7 @@ def test_uploadStudentData():
 def test_uploadStudentData_Invalid():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
 
-    driver.get(siteIPAddress)
+    driver.get(siteIPAddress + "/Main")
 
     #checks if the home pahe is loaded
     title = driver.title
@@ -160,15 +183,27 @@ def test_uploadStudentData_Invalid():
     #get the size of the list of the rows
     totalRows = student_table.findElements(By.tagName("tr"))
 
+    studentData = getStudentInfo(studentDataFileName)
+
     dataFound = False
+    found = [False] * studentDataFileName.count()
     #find the student data, if found, set dataFound to true
-    for row in totalRows:
-        student_name = row.findElements(By.id("student-name"))
-        student_id = row.findElements(By.id("student-id"))
-        if student_name == studentName && student_id == studentID:
-            dataFound = True
+    for s in studentData:
+        for row in totalRows:
+            student_name = row.findElements(By.id("student-name"))
+            student_id = row.findElements(By.id("student-id"))
+            #this should be the expected result
+            if (student_name == s[1]) and (student_id == s[0]):
+                index = studentData.index(s)
+                found[index] = True
+
+    for f in found:
+        if f == False:
+            dataFound == False
             break;
-    #This should be the expected result
+        else:
+            dataFound = True
+    
     if dataFound == False:
         print("Error! Student Data was not uploaded successfully!")
 
