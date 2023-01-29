@@ -43,6 +43,8 @@ jobs:
         run: chromedriver --version
       - name: Check Selenium version
         run: pip show selenium
+      - name: Check environment
+        run: pip list
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
