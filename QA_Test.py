@@ -36,7 +36,8 @@ def test_goToUploadDataPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
+    upload_button = driver.find_element("xpath",'//a[@href="{{ url_for('upload_data') }}"]')
+    
     
     #Upload Data button is clicked
     upload_button.click()
@@ -62,7 +63,7 @@ def test_goToPrepareEmailPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    prepare_email_button = driver.find_element_by_xpath('//a[@href="{{ url_for('prepare_email') }}"]')
+    prepare_email_button = driver.find_element("xpath",'//a[@href="{{ url_for('prepare_email') }}"]')
     
     #Upload Data button is clicked
     prepare_email_button.click()
@@ -88,7 +89,7 @@ def test_goToMatchStudentPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    match_student_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
+    match_student_button = driver.find_element("xpath",'//a[@href="{{ url_for('match_student') }}"]')
     
     #Upload Data button is clicked
     match_student_button.click()
@@ -114,7 +115,7 @@ def test_goToSettingsPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    settings_button = driver.find_element_by_xpath('//a[@href="{{ url_for('settings') }}"]')
+    settings_button = driver.find_element("xpath",'//a[@href="{{ url_for('settings') }}"]')
     
     #Upload Data button is clicked
     settings_button.click()
@@ -140,7 +141,7 @@ def test_uploadStudentData():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
+    upload_button = driver.find_element("xpath",'//a[@href="{{ url_for('upload_data') }}"]')
     
     #Upload Data button is clicked
     upload_button.click()
@@ -168,7 +169,7 @@ def test_uploadStudentData():
     driver.implicitly_wait(2)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    view_students_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
+    view_students_button = driver.find_element("xpath",'//a[@href="{{ url_for('match_student') }}"]')
     
     #Upload Data button is clicked
     view_students_button.click()
@@ -222,7 +223,7 @@ def test_uploadStudentData_Invalid():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
+    upload_button = driver.find_element("xpath",'//a[@href="{{ url_for('upload_data') }}"]')
     
     #Upload Data button is clicked
     upload_button.click()
@@ -248,7 +249,7 @@ def test_uploadStudentData_Invalid():
     driver.implicitly_wait(2)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    view_students_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
+    view_students_button = driver.find_element("xpath",'//a[@href="{{ url_for('match_student') }}"]')
     
     #Upload Data button is clicked
     view_students_button.click()
