@@ -24,7 +24,7 @@ def getStudentInfo(studentData):
 
 #test if clicking the "Upload Data" button on the nav bar opens the correct oage
 def test_goToUploadDataPage():
-    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
+    driver = webdriver.Chrome(service=ChromeService(executable_path=path_to_chromedriver))
 
     driver.get(siteIPAddress + "/Main")
 
