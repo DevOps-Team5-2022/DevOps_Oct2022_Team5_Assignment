@@ -49,7 +49,7 @@ jobs:
         run: pip list
       - name: Run Flask
         run: |
-          export Flask_APP = app.py
+          export Flask_APP = main.py
           flask run
       - name: Testing Dev's code
         run: |
