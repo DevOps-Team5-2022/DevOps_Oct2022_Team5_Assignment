@@ -36,7 +36,7 @@ def test_goToUploadDataPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element("xpath",'//a[@href="{{ url_for('upload_data') }}"]')
+    upload_button = driver.find_element(By.id("upload-data-button"))
     
     
     #Upload Data button is clicked
