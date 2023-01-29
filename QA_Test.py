@@ -5,7 +5,9 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port, subdue to changes
-global siteIPAddress, studentDataFileName, studentName, studentID
+global siteIPAddress, studentDataFileName
+siteIPAddress = "http://127.0.0.1:5221"
+studentDataFileName = "studentData.csv"
 
 print(selenium.__version__)
 
@@ -112,10 +114,10 @@ def test_goToSettingsPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    match_student_button = driver.find_element_by_xpath('//a[@href="{{ url_for('settings') }}"]')
+    settings_button = driver.find_element_by_xpath('//a[@href="{{ url_for('settings') }}"]')
     
     #Upload Data button is clicked
-    match_student_button.click()
+    settings_button.click()
 
     driver.implicitly_wait(0.5)
     
