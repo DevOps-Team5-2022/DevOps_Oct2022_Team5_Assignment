@@ -2,7 +2,7 @@ name: CI for QA
 on:
   push:
     branches:
-      QABranch
+    QABranch
   pull_request:
       branches:
         QABranch
