@@ -7,6 +7,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 global siteIPAddress, studentDataFileName, studentName, studentID
 siteIPAddress, studentDataFileName = "127.0.0.1:522", "student-data.csv"
 
+print(selenium.__version__)
+
 #get student info from student data file:
 def getStudentInfo(studentData):
     students = []
