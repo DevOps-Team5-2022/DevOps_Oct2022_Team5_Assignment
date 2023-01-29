@@ -5,7 +5,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port, subdue to changes
 global siteIPAddress, studentDataFileName, studentName, studentID
-siteIPAddress, studentDataFileName = "127.0.0.1:522", "student-data.csv"
 
 #get student info from student data file:
 def getStudentInfo(studentData):
@@ -27,12 +26,12 @@ def test_goToUploadDataPage():
 
     #checks if the home pahe is loaded
     title = driver.title
-    assert title == "Home"
+    assert title == "DevOps Team 5 Home Page"
 
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element(by=By.ID, value="upload-data-button")
+    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
     
     #Upload Data button is clicked
     upload_button.click()
@@ -41,7 +40,85 @@ def test_goToUploadDataPage():
     
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
-    assert target_title == "Upload Data"
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.quit()
+
+#test if clicking the "Prepare Email" button on the nav bar opens the correct oage
+def test_goToPrepareEmailPage():
+    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    prepare_email_button = driver.find_element_by_xpath('//a[@href="{{ url_for('prepare_email') }}"]')
+    
+    #Upload Data button is clicked
+    prepare_email_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Prepare Email Page"
+
+    driver.quit()
+
+#test if clicking the "Match Student" button on the nav bar opens the correct oage
+def test_goToMatchStudentPage():
+    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Match Student Page"
+
+    driver.quit()
+
+#test if clicking the "Settings" button on the nav bar opens the correct oage
+def test_goToSettingsPage():
+    driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element_by_xpath('//a[@href="{{ url_for('settings') }}"]')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Settings Page"
 
     driver.quit()
 
@@ -53,12 +130,12 @@ def test_uploadStudentData():
 
     #checks if the home pahe is loaded
     title = driver.title
-    assert title == "Home"
+    assert title == "DevOps Team 5 Home Page"
 
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element(by=By.ID, value="upload-data-button")
+    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
     
     #Upload Data button is clicked
     upload_button.click()
@@ -67,7 +144,7 @@ def test_uploadStudentData():
     
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
-    assert target_title == "Upload Data"
+    assert target_title == "DevOps Team 5 Upload Data Page"
 
     driver.implicitly_wait(0.5)
 
@@ -86,7 +163,7 @@ def test_uploadStudentData():
     driver.implicitly_wait(2)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    view_students_button = driver.find_element(by=By.ID, value="view-students-button")
+    view_students_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
     
     #Upload Data button is clicked
     view_students_button.click()
@@ -95,7 +172,7 @@ def test_uploadStudentData():
     
     #checks if the Upload Data pahe is loaded
     target_title2 = driver.title
-    assert target_title2 == "View Students"
+    assert target_title2 == "DevOps Team 5 Match Student Page"
 
     driver.implicitly_wait(0.5)
 
@@ -135,12 +212,12 @@ def test_uploadStudentData_Invalid():
 
     #checks if the home pahe is loaded
     title = driver.title
-    assert title == "Home"
+    assert title == "DevOps Team 5 Home Page"
 
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    upload_button = driver.find_element(by=By.ID, value="upload-data-button")
+    upload_button = driver.find_element_by_xpath('//a[@href="{{ url_for('upload_data') }}"]')
     
     #Upload Data button is clicked
     upload_button.click()
@@ -149,7 +226,7 @@ def test_uploadStudentData_Invalid():
     
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
-    assert target_title == "Upload Data"
+    assert target_title == "DevOps Team 5 Upload Data Page"
 
     driver.implicitly_wait(0.5)
 
@@ -166,7 +243,7 @@ def test_uploadStudentData_Invalid():
     driver.implicitly_wait(2)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    view_students_button = driver.find_element(by=By.ID, value="view-students-button")
+    view_students_button = driver.find_element_by_xpath('//a[@href="{{ url_for('match_student') }}"]')
     
     #Upload Data button is clicked
     view_students_button.click()
@@ -175,7 +252,7 @@ def test_uploadStudentData_Invalid():
     
     #checks if the Upload Data pahe is loaded
     target_title2 = driver.title
-    assert target_title2 == "View Students"
+    assert target_title2 == "DevOps Team 5 Match Student Page"
 
     driver.implicitly_wait(0.5)
 
