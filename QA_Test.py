@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-#set site's localhost IP Address and port, subdue to changes
+#set site's localhost IP Address and port
 global siteIPAddress, studentDataFileName
 siteIPAddress = "http://127.0.0.1:5221"
 studentDataFileName = "studentData.csv"
