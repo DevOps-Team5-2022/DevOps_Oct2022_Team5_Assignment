@@ -20,6 +20,7 @@ jobs:
           pip install flake8 pytest pytest-cov
           pip install selenium-yaml
           pip install webdriver-manager
+          pip install Flask
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
