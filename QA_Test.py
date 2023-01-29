@@ -116,7 +116,7 @@ def test_goToMatchStudentPage():
 
 #test if clicking the "Settings" button on the nav bar opens the correct oage
 def test_goToSettingsPage():
-   options = Options()
+    options = Options()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
