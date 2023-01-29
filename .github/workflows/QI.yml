@@ -49,8 +49,7 @@ jobs:
         run: pip list
       - name: Run Flask
         run: |
-          export Flask_APP = main.py
-          flask run
+          python main.py
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
