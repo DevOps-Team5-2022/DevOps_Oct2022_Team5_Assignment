@@ -13,7 +13,7 @@ DevOps 2022 Assignment Repo for Team 5
 ### Requirements gathering flow
 Go through the project scope as a team. Identify areas which will require IT to develop. From the areas break it down to what are the technologies required and its dependencies. Once all is identified the team will generate user stories for the requirements and planning poker will start.
 ### Backlog issues creation flow
-#### New Task/Enhancement to be done
+#### Enhancement to be done
 1. Create a new issue (Task) with reasonable naming sense
 2. Include the label "Enhancement". Add Milestone related to issue eg. upload data
 3. Assign the issue to whoever will be completing or wants to complete the task. Refer to Trello if needed
