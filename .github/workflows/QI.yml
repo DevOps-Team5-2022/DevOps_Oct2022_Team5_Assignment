@@ -47,6 +47,10 @@ jobs:
         run: pip show selenium
       - name: Check environment
         run: pip list
+      - name: Run Flask
+        run: |
+          export Flask_APP = app.py
+          flask run
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
