@@ -30,7 +30,7 @@ def test_goToPrepareEmailPage():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
 
@@ -41,7 +41,37 @@ def test_goToPrepareEmailPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    prepare_email_button = driver.find_element("xpath",'//a[@href="{{ url_for('prepare_email') }}"]')
+    upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    upload_data_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.quit()
+
+#test if clicking the "Prepare Email" button on the nav bar opens the correct oage
+def test_goToPrepareEmailPage():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    prepare_email_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[3]/a')
     
     #Upload Data button is clicked
     prepare_email_button.click()
@@ -60,7 +90,7 @@ def test_goToMatchStudentPage():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
 
@@ -71,7 +101,7 @@ def test_goToMatchStudentPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    match_student_button = driver.find_element("xpath",'//a[@href="{{ url_for('match_student') }}"]')
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
     
     #Upload Data button is clicked
     match_student_button.click()
@@ -90,7 +120,7 @@ def test_goToSettingsPage():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
 
@@ -101,7 +131,7 @@ def test_goToSettingsPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    settings_button = driver.find_element("xpath",'//a[@href="{{ url_for('settings') }}"]')
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a"]')
     
     #Upload Data button is clicked
     settings_button.click()
@@ -120,7 +150,7 @@ def test_uploadStudentData():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
 
@@ -206,7 +236,7 @@ def test_uploadStudentData_Invalid():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
 
