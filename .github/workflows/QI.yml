@@ -34,6 +34,7 @@ jobs:
           git config user.email "kevinkhew01@gmail.com"
           git status
           git checkout remotes/origin/DevBranch main.py
+          git checkout remotes/origin/DevBranch Email.py
           git checkout remotes/origin/DevBranch templates
           git checkout remotes/origin/DevBranch static/css
       - name: list our contents
