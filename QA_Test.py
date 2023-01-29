@@ -11,18 +11,6 @@ studentDataFileName = "studentData.csv"
 
 print(selenium.__version__)
 
-#get student info from student data file:
-def getStudentInfo(studentData):
-    students = []
-    global studentName, studentID
-    with open(studentData, "r") as f:
-        reader = csv.reader(f)
-        for student in reader:
-            students.append(student)
-        # remove the headers from data
-        students.pop(0)
-        return students
-
 #test if clicking the "Upload Data" button on the nav bar opens the correct oage
 def test_goToUploadDataPage():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
