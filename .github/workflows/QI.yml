@@ -2,9 +2,9 @@ name: CI for QA Branch
 on:
   push:
     branches:
-    QABranch
+      QABranch
     
-job:
+jobs:
   testDevCode:
     runs-on: ubuntu-latest
     steps:
