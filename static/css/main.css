@@ -75,6 +75,11 @@ h3 {
   text-decoration: none;
 }
 
+.title-text {
+    margin-left: 50px; 
+    margin-bottom: 10px
+}
+
 .title-black-line {
     max-width: 700px;
     height: 2.5px;
