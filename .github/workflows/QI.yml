@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: DevOps-Team5-2022/DevOps_Oct2022_Team5_Assignment
+          fetch-depth: "0" 
       - name: Get Dev Code
         run: |
           git --version
