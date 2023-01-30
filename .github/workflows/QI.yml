@@ -55,4 +55,65 @@ jobs:
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
-
+      - if: failure()
+        uses: JasonEtco/create-an-issue@v2.9.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE.md
+      
+      - name: send telegram message on push
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO_QA }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Dev pytest failed. Double check your code for errors. If nothing is found please notify Devs about issue
+    
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          junit_files: "QAReportDevCode.xml"
+      - name: create folder & move files
+        if: always()
+        run: |
+          mkdir downloads
+          mv *.xml ./downloads
+        
+      - name: Upload document
+        if: always()
+        uses: actions/upload-artifact@v2
+        with: 
+          name: QATestResultsDev
+          path: downloads
+      - name: Set environment version
+        if: always()
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: download remote information
+        if: always()
+        uses: actions/download-artifact@v2
+        with:
+          name: QATestResultsDev
+      - name: Calculate project metrics
+        if: always()
+        id: projectmetrics
+        run: |
+          yarn
+          yarn build
+          SIZE=($(du -s dist/))
+          echo "::set-output name=code_size::$SIZE"
+      - uses: floric/repo-monitor-action@v1.4.1
+        if: always()
+        name: Update Report
+        with:
+          key: code-size
+          value: ${{ steps.projectmetrics.outputs.code_size }}
+          token: ${{ secrets.GITHUB_TOKEN }}
