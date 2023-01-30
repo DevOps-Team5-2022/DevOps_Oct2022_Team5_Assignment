@@ -32,6 +32,10 @@ jobs:
       - name: Stop MySQL Server
         run: |
           sudo service mysql stop
+      - name: Create mysql socket directory
+        run: sudo mkdir -p /var/run/mysqld
+      - name: Change ownership of mysql socket directory
+        run: sudo chown mysql:mysql /var/run/mysqld
 
       - name: Start MySQL Server in Safe Mode
         run: |
