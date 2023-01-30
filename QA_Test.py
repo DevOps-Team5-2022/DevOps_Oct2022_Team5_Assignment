@@ -131,7 +131,7 @@ def test_goToSettingsPage():
     driver.implicitly_wait(0.5)
 
     #find the button to enter Upload Data page, subdue to naming changes
-    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a"]')
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a')
     
     #Upload Data button is clicked
     settings_button.click()
@@ -141,6 +141,36 @@ def test_goToSettingsPage():
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
     assert target_title == "DevOps Team 5 Settings Page"
+
+    driver.quit()
+    
+#test if clicking the "Settings" button on the nav bar opens the correct oage
+def test_goToUploadPage():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    settings_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
 
     driver.quit()
 
