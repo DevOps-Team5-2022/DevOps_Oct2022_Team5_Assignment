@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request
 import os
 import Email
+import mysql.connector
 
 emailDirPath = ""
 resumeDirPath = ""
-    
+conn = mysql.connector.connect(user='root', password='',
+                              host='localhost',database='devops')
+
+cursor = conn.cursor()
 app = Flask(__name__)
 
 @app.route("/Main")
@@ -17,7 +21,11 @@ def upload_data():
 
 @app.route("/Match_Student")
 def match_student():
-    return render_template("match_student.html")
+    cursor.execute("SELECT * FROM student")
+    result = cursor.fetchall()
+    cursor.execute("SELECT * FROM company")
+    results = cursor.fetchall()
+    return render_template("match_student.html", student_data = result, company_data = results)
 
 @app.route("/Prepare_Email")
 def prepare_email():

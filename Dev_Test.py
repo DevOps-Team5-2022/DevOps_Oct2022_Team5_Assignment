@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os.path
 import main
 import Email
+import database_crud as db
 
 def test_home_url():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
@@ -61,3 +62,5 @@ def test_email_function():
 
     assert os.path.exists("C:\\Tan Jun Jie Internship Email.msg") == True
     
+def test_create_table():
+    assert db.create_table() == ('exist',)
