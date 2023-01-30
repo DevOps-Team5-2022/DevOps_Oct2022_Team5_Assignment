@@ -24,17 +24,38 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-      - name: Setup MYSQL
+      - name: Install MySQL Server
         run: |
           sudo apt-get update
           sudo apt-get install -y mysql-server
+
+      - name: Stop MySQL Server
+        run: |
+          sudo service mysql stop
+
+      - name: Start MySQL Server in Safe Mode
+        run: |
+          sudo mysqld_safe --skip-grant-tables &
+
+      - name: Login to MySQL without password
+        run: |
+          sudo mysql -u root
+
+      - name: Reset MySQL root password
+        run: |
+          ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ env.MYSQL_ROOT_PASSWORD }}';
+          FLUSH PRIVILEGES;
+          exit
+
+      - name: Stop MySQL Server
+        run: |
+          sudo service mysql stop
+
+      - name: Start MySQL Server
+        run: |
           sudo service mysql start
           systemctl status mysql
-      - name: Show users in MySQL
-        run: |
-          mysql -u root 
-          SELECT User, Host FROM mysql.user;
-          exit
+      
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
