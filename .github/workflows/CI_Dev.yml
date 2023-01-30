@@ -14,17 +14,27 @@ jobs:
       - name: Install Libraries
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-cov		
+          pip install flake8 pytest pytest-cov
+          
           
       - name: Install MySQL server
         run: |
           sudo apt-get update
-          sudo apt-get install -y mysql-server      
+          sudo apt-get install -y mysql-server  
+          sudo apt-get install nano -y
       - name: Start MySQL service
         run: |
           sudo service mysql start
       - name: Stop MySQL service
         run: sudo service mysql stop
+      - name: Locate mysql.cnf
+        run: echo $(mysql --help | grep "Default options are read from the following files" | awk '{print $6}')
+
+      - name: Create mysql.cnf
+        run: echo "[mysqld]\nsocket = /var/run/mysqld/mysqld.sock" | sudo nano $(mysql --help | grep "Default options are read from the following files" | awk '{print $6}')
+
+      - name: Restart MySQL service
+        run: sudo service mysql restart 
 
       - name: Start MySQL in safe mode
         run: sudo mysqld_safe --skip-grant-tables &
