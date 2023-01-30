@@ -51,7 +51,7 @@ jobs:
         if: failure()
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO_DEV }}
+          to: ${{ secrets.TELEGRAM_TO_QA }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ${{ github.actor }} created commit:
@@ -60,7 +60,7 @@ jobs:
             Repository: ${{ github.repository }}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            Dev pytest failed
+            Dev Unit test failed
     
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
