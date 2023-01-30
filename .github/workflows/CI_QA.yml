@@ -44,17 +44,7 @@ jobs:
       - name: Login to MySQL without password
         run: |
           sudo mysql -u root
-
-      - name: Reset MySQL root password
-        run: |
-          ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ env.MYSQL_ROOT_PASSWORD }}';
-          FLUSH PRIVILEGES;
-          exit
-
-      - name: Stop MySQL Server
-        run: |
-          sudo service mysql stop
-
+          
       - name: Start MySQL Server
         run: |
           sudo service mysql start
