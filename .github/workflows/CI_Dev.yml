@@ -25,7 +25,7 @@ jobs:
           sudo service mysql start
       - name: Create MySQL user
         run: |
-          mysql -u root <<EOF
+          mysql -u root -p"root" <<EOF
           CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
           GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost';
           EOF
