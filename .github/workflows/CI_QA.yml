@@ -30,8 +30,7 @@ jobs:
           sudo apt-get install -y mysql-server
           sudo service mysql start
           mysql --user=root <<< "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
-          mysql --user=root <<< "CREATE DATABASE devops;"
-          mysql --user=root <<< "SELECT * FROM mysql.user;"        
+          mysql --user=root <<< "SELECT User, Host FROM mysql.user;"      
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
