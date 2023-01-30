@@ -41,14 +41,6 @@ jobs:
       - name: list our contents
         run: |
           ls
-      - name: Check Chrome version
-        run: google-chrome --version
-      - name: Check ChromeDriver version
-        run: chromedriver --version
-      - name: Check Selenium version
-        run: pip show selenium
-      - name: Check environment
-        run: pip list
       - name: Run Flask
         run: |
           python main.py &
