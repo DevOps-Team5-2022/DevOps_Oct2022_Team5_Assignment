@@ -64,3 +64,15 @@ def test_email_function():
     
 def test_create_table():
     assert db.create_table() == ('exist',)
+
+def test_insert_record():
+    assert db.insert_record() == "inserted"
+
+def test_update_record():
+    assert db.update_record() == "true"
+
+def test_delete_record():
+    assert db.delete_record() == "false"
+
+def test_delete_table():
+    assert db.delete_table() == ('nonexist',)
