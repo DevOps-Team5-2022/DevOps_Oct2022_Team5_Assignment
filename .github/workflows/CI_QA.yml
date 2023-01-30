@@ -55,6 +55,7 @@ jobs:
           systemctl status mysql
       - name: Run Flask
         run: |
+          mysql -u root -p"root"
           python main.py &
       - name: Testing Dev's code
         run: |
