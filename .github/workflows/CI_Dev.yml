@@ -23,12 +23,28 @@ jobs:
       - name: Start MySQL service
         run: |
           sudo service mysql start
-      - name: Create MySQL user
+      - name: Stop MySQL service
+        run: sudo service mysql stop
+
+      - name: Start MySQL in safe mode
+        run: sudo mysqld_safe --skip-grant-tables &
+
+      - name: Connect to MySQL as root
+        run: mysql -u root -p"root"
+
+      - name: Change root password to empty
         run: |
-          mysql -u root -p"root" <<EOF
-          CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
-          GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost';
-          EOF
+          UPDATE mysql.user SET authentication_string='' WHERE User='root';
+          FLUSH PRIVILEGES;
+
+      - name: Quit MySQL client
+        run: quit
+
+      - name: Stop MySQL service
+        run: sudo service mysql stop
+
+      - name: Start MySQL service
+        run: sudo service mysql start
       - name: List MySQL users
         run: |
-          mysql -u root -p"root" -e "SELECT User, Host FROM mysql.user;"
+          mysql -u root -e "SELECT User, Host FROM mysql.user;"
