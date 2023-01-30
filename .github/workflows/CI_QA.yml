@@ -24,10 +24,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-      - name: Install & Start SQL
+      - name: Setup MYSQL
         run: |
-          sudo apt-get install mysql-server
-          sudo service mysql start          
+          sudo apt-get update
+          sudo apt-get install -y mysql-server
+          sudo service mysql start
+          mysql --user=root <<< "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
+          mysql --user=root <<< "CREATE DATABASE devops;"
+          mysql --user=root <<< "SELECT * FROM mysql.user;"        
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
@@ -48,7 +52,6 @@ jobs:
           ls
       - name: Run Flask
         run: |
-          mysql -u root
           python main.py &
       - name: Testing Dev's code
         run: |
