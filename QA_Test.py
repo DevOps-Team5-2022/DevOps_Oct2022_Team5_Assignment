@@ -1,3 +1,5 @@
+import csv
+
 import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -6,16 +8,16 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port
-global siteIPAddress, studentDataFileName
+global siteIPAddress, studentDataFileName, companyDataFileName #
 siteIPAddress = "http://127.0.0.1:5221"
 studentDataFileName = "studentData.csv"
+companyDataFileName = "companyDataFile.csv"
 
 print(selenium.__version__)
 
 #get student info from student data file:
 def getStudentInfo(studentData):
     students = []
-    global studentName, studentID
     with open(studentData, "r") as f:
         reader = csv.reader(f)
         for student in reader:
@@ -23,9 +25,21 @@ def getStudentInfo(studentData):
         # remove the headers from data
         students.pop(0)
         return students
+    
 
-#test if clicking the "Prepare Email" button on the nav bar opens the correct oage
-def test_goToPrepareEmailPage():
+#get student info from student data file:
+def getCompanyInfo(companyData):
+    companies = []
+    with open(companyData, "r") as f:
+        reader = csv.reader(f)
+        for company in reader:
+            companies.append(company)
+        # remove the headers from data
+        companies.pop(0)
+        return companies
+
+#test if clicking the "Upload Data" button on the nav bar opens the correct oage
+def test_goToUploadDataPage():
     options = Options()
     options.add_argument('--headless')
     #options.add_argument('--no-sandbox')
@@ -143,36 +157,6 @@ def test_goToSettingsPage():
     assert target_title == "DevOps Team 5 Settings Page"
 
     driver.quit()
-    
-#test if clicking the "Settings" button on the nav bar opens the correct oage
-def test_goToUploadPage():
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
-
-    driver.get(siteIPAddress + "/Main")
-
-    #checks if the home pahe is loaded
-    title = driver.title
-    assert title == "DevOps Team 5 Home Page"
-
-    driver.implicitly_wait(0.5)
-
-    #find the button to enter Upload Data page, subdue to naming changes
-    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
-    
-    #Upload Data button is clicked
-    settings_button.click()
-
-    driver.implicitly_wait(0.5)
-    
-    #checks if the Upload Data pahe is loaded
-    target_title = driver.title
-    assert target_title == "DevOps Team 5 Upload Data Page"
-
-    driver.quit()
 
 #test if student data is uploaded successfully
 def test_uploadStudentData():
@@ -194,7 +178,7 @@ def test_uploadStudentData():
     upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
     
     #Upload Data button is clicked
-    upload_button.click()
+    upload_data_button.click()
 
     driver.implicitly_wait(0.5)
     
@@ -222,7 +206,7 @@ def test_uploadStudentData():
     match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
     
     #Upload Data button is clicked
-    view_students_button.click()
+    match_student_button.click()
 
     driver.implicitly_wait(0.5)
     
@@ -280,7 +264,7 @@ def test_uploadStudentData_Invalid():
     upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
     
     #Upload Data button is clicked
-    upload_button.click()
+    upload_data_button.click()
 
     driver.implicitly_wait(0.5)
     
@@ -306,7 +290,7 @@ def test_uploadStudentData_Invalid():
     match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
     
     #Upload Data button is clicked
-    view_students_button.click()
+    match_student_button.click()
 
     driver.implicitly_wait(0.5)
     
@@ -343,5 +327,65 @@ def test_uploadStudentData_Invalid():
     
     if dataFound == False:
         print("Error! Student Data was not uploaded successfully!")
+
+    driver.quit()
+
+#test if company data is uploaded successfully
+def test_uploadCompanyData():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    upload_data_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the upload file button and click it
+    upload_student_data_button = driver.find_element(by=By.ID, value="upload-company-data-file")
+    
+    #Upload Student Data button is clicked
+    upload_student_data_button.send_keys(companyDataFileName)
+
+    companyData = getCompanyInfo(companyDataFileName)
+
+    #check if the right file is uploaded
+    file_upload_message = driver.find_element(by=By.ID, value="upload-company-data-file-message").text
+    assert file_upload_message + "File Uploaded:" + companyDataFileName
+
+    driver.implicitly_wait(2)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title2 = driver.title
+    assert target_title2 == "DevOps Team 5 Match Student Page"
+
+    driver.implicitly_wait(0.5)
 
     driver.quit()
