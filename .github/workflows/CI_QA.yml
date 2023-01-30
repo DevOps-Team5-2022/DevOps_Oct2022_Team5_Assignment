@@ -48,7 +48,7 @@ jobs:
           ls
       - name: Run Flask
         run: |
-          sudo mysql --user=root --password=
+          sudo mysql --user=root
           python main.py &
       - name: Testing Dev's code
         run: |
