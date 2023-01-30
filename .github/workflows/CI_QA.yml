@@ -24,6 +24,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+      - name: Install & Run SQL
+        run: |
+          sudo apt-get install mysql-server
+          sudo systemctl start mysql
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
