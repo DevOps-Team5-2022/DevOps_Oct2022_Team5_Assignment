@@ -28,28 +28,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y mysql-server
+          sudo systemctl start mysql
           systemctl status mysql
-      - name: Stop MySQL Server
-        run: |
-          sudo service mysql stop
-      - name: Create mysql socket directory
-        run: sudo mkdir -p /var/run/mysqld
-      - name: Change ownership of mysql socket directory
-        run: sudo chown mysql:mysql /var/run/mysqld
-
-      - name: Start MySQL Server in Safe Mode
-        run: |
-          sudo mysqld_safe --skip-grant-tables &
-
-      - name: Login to MySQL without password
-        run: |
-          sudo mysql -u root
           
-      - name: Start MySQL Server
-        run: |
-          sudo service mysql start
-          systemctl status mysql
-      
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
