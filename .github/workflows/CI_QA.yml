@@ -49,6 +49,7 @@ jobs:
       - name: list our contents
         run: |
           ls
+          systemctl status mysql
       - name: Run Flask
         run: |
           python main.py &
