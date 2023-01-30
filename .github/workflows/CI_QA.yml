@@ -28,7 +28,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y mysql-server
-
+          systemctl status mysql
       - name: Stop MySQL Server
         run: |
           sudo service mysql stop
