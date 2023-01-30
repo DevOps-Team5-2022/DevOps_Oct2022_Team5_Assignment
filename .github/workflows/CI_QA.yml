@@ -51,8 +51,8 @@ jobs:
       - name: list our contents
         run: |
           ls
-          mysql -u root -p"root" -e "SELECT User, Host FROM mysql.user;"
-          systemctl status mysql
+      - name: List All Databases in the Server
+        run: mysql -u root -p"root" -e 'SHOW DATABASES;'
       - name: Run Flask
         run: |
           mysql -u root -p"root"
