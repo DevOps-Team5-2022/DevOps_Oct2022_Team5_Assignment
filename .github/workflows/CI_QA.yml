@@ -47,7 +47,7 @@ jobs:
           
       - name: Start MySQL Server
         run: |
-          sudo service mysql start &
+          sudo service mysql start
           systemctl status mysql
       
       - name: Checkout Repo
