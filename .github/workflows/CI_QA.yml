@@ -24,11 +24,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-      - name: Install & Run SQL
+      - name: Install & Start SQL
         run: |
           sudo apt-get install mysql-server
-          sudo service mysql start
-          sudo mysql --user=root --password=root
+          sudo service mysql start          
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
@@ -49,6 +48,7 @@ jobs:
           ls
       - name: Run Flask
         run: |
+          sudo mysql --user=root --password=
           python main.py &
       - name: Testing Dev's code
         run: |
