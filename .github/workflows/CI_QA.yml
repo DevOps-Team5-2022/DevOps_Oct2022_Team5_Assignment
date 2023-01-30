@@ -27,7 +27,7 @@ jobs:
       - name: Install & Run SQL
         run: |
           sudo apt-get install mysql-server
-          sudo systemctl start mysql
+          sudo service mysql start
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
