@@ -31,4 +31,4 @@ jobs:
           EOF
       - name: List MySQL users
         run: |
-          mysql -u newuser -p"password" -e "SELECT User, Host FROM mysql.user;"
+          mysql -u root -p"root" -e "SELECT User, Host FROM mysql.user;"
