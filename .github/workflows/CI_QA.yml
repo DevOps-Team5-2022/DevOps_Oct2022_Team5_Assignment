@@ -51,6 +51,8 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Run SQL Script to Create Database
+        run: mysql -u root -proot < script.sql
       - name: List All Databases in the Server
         run: mysql -u root -p"root" -e 'SHOW DATABASES;'
       - name: Run Flask
