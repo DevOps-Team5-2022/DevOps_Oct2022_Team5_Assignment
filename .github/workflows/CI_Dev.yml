@@ -17,10 +17,15 @@ jobs:
       - name: Install Libraries
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-cov	
-          pip install selenium-yaml
+          pip install flake8 pytest pytest-cov
+          pip install selenium
           pip install webdriver-manager
-          pip install flask
+          pip install Flask
+          pip install independentsoft.msg
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
@@ -29,6 +34,9 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Run Flask
+        run: |
+          python main.py &
       - name: Test Dev's script
         run: |
           pytest Dev_Test.py -v -cov --junitxml=devReportDevCode.xml
@@ -108,8 +116,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest pytest-cov
-          pip install selenium-yaml
+          pip install selenium
           pip install webdriver-manager
+          pip install Flask
+          pip install independentsoft.msg
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
@@ -124,6 +139,9 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Run Flask
+        run: |
+          python main.py &
       - name: Test QA's script
         run: |
           pytest QA_Test.py -v -cov --junitxml=devReportQACode.xml
