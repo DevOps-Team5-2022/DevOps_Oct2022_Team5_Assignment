@@ -26,10 +26,9 @@ jobs:
           sudo apt-get install -y google-chrome-stable
       - name: Setup MYSQL
         run: |
-          sudo apt-get install -y wget curl
-          wget https://downloadsapachefriends.global.ssl.fastly.net/xampp-files/7.4.15/xampp-linux-x64-7.4.15-0-installer.run
-          sudo bash xampp-linux-x64-7.4.15-0-installer.run
-          sudo /opt/lampp/lampp startmysql
+          sudo apt-get update
+          sudo apt-get install -y mysql-server
+          sudo service mysql start
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
