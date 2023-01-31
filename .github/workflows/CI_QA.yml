@@ -36,6 +36,8 @@ jobs:
           sudo systemctl start mysql
           sudo systemctl status mysql
           mysql -u root -p"root" -e 'SELECT version()'
+          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql --host 127.0.0.1 --port 5221 -uroot -p"root" -e "SHOW DATABASES"
           
       - name: Checkout Repo
         uses: actions/checkout@v3
