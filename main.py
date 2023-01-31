@@ -5,7 +5,7 @@ import mysql.connector
 
 emailDirPath = ""
 resumeDirPath = ""
-conn = mysql.connector.connect(user='root', password='',
+conn = mysql.connector.connect(user='root', password='root',
                               host='localhost',database='devops')
 
 cursor = conn.cursor()
