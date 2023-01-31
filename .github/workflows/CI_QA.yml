@@ -35,9 +35,6 @@ jobs:
           sudo apt-get install -y mysql-server
           sudo systemctl start mysql
           sudo systemctl status mysql
-          mysql -u root -p"root" -e 'SELECT version()'
-          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
-          mysql -u root -p"root" -e "SHOW DATABASES"
           
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -57,7 +54,12 @@ jobs:
       - name: list our contents
         run: |
           ls
-      
+      - name: Create DevOps db & tables
+        run: |
+          mysql -u root -p"root" -e 'SELECT version()'
+          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql -u root -p"root" -e "SHOW DATABASES"
+          
       - name: Run Flask
         run: |
           sudo systemctl status mysql
