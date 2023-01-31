@@ -26,6 +26,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+      - name: Install MySQL Server
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-server
+          sudo systemctl start mysql
+          sudo systemctl status mysql
       - name: Checkout own repo
         uses: actions/checkout@v3
         with:
@@ -34,6 +40,11 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Create DevOps db & tables
+        run: |
+          mysql -u root -p"root" -e 'SELECT version()'
+          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql -u root -p"root" -e "SHOW DATABASES"
       - name: Run Flask
         run: |
           python main.py &
