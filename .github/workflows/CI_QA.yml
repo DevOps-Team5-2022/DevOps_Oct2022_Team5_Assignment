@@ -35,6 +35,7 @@ jobs:
           sudo apt-get install -y mysql-server
           sudo systemctl start mysql
           systemctl status mysql
+          mysql -u root -p"root" -e 'SELECT version()'
           
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -54,15 +55,15 @@ jobs:
       - name: list our contents
         run: |
           ls
-      - name: List All Databases in the Server
-        run: mysql -u root -p"root" -e 'SHOW DATABASES;'
+      
       - name: Run Flask
         run: |
-          mysql -u root -p"root" &
           python main.py &
+      
       - name: Testing Dev's code
         run: |
           pytest QA_Test.py -v -cov --junitxml=QAReportDevCode.xml
+      
       - if: failure()
         uses: JasonEtco/create-an-issue@v2.9.1
         env:
