@@ -1,5 +1,5 @@
 import mysql.connector
-conn = mysql.connector.connect(user='root', password='',
+conn = mysql.connector.connect(user='root', password='root',
                               host='localhost',database='devops')
 
 cursor = conn.cursor()
