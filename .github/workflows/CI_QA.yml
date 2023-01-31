@@ -34,7 +34,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mysql-server
           sudo systemctl start mysql
-          systemctl status mysql
+          sudo systemctl status mysql
           mysql -u root -p"root" -e 'SELECT version()'
           
       - name: Checkout Repo
@@ -58,6 +58,7 @@ jobs:
       
       - name: Run Flask
         run: |
+          sudo systemctl status mysql
           python main.py &
       
       - name: Testing Dev's code
