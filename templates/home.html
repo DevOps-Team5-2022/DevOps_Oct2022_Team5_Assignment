@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>DevOps Team 5 Home Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head
+    <body>
+        <header>
+            <div class="container">
+                <strong>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="{{ url_for('upload_data') }}">Upload Data</a></li>
+                            <li><a href="{{ url_for('match_student') }}">Match Students</a></li>
+                            <li><a href="{{ url_for('prepare_email') }}">Prepare Emails</a></li>
+                            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                        </ul>
+                    </nav>
+                </strong>
+            </div>
+        </header>
+        <h1 style="text-align:center">Welcome</h1>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="border: 3px solid #000">
+                <img src="{{ url_for('static', filename='images/devops lifecycle diagram.png') }}" width="600" />
+            </div>
+            <p style="font-size:xx-small; margin-left: -370px; margin-top: 1px;">
+                Webster, E.(2022).[3 key benefits of DevOps]<br />
+                &nbsp;&nbsp;&nbsp;[Digital Image].NEAL ANALYTICS.<br />
+                &nbsp;&nbsp;&nbsp;<a href="https://nealanalytics.com/blog/3-key-benefits-of-devops/">https://nealanalytics.com/blog/3-key-benefits-of-devops/</a>
+            </p>
+        </div>
+
+
+
+
+        <img src="{{ url_for('static', filename='images/pepe.png') }}" style="position:absolute; right: 0px; bottom: 0px;" />
+    </body>
+</html>
