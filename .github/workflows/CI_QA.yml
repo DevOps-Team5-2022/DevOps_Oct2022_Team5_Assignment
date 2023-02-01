@@ -60,6 +60,7 @@ jobs:
           mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
           mysql -u root -p"root" -e "SHOW DATABASES"
           mysql -u root -p"root" -e "USE devops"
+          mysql -u root -p"root" -e "SHOW tables"
           mysql -u root -p"root" < devops.sql
       - name: Run Flask
         run: |
