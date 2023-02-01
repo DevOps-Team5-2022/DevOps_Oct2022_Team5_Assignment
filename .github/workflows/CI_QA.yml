@@ -56,11 +56,7 @@ jobs:
           ls
       - name: Create DevOps db & tables
         run: |
-          mysql -u root -p"root" -e 'SELECT version()'
-          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
-          mysql -u root -p"root" -e "SHOW DATABASES"   
           mysql -u root -p"root" < devops.sql
-          mysql -u root -p"root" -e "SHOW tables"
           
       - name: Run Flask
         run: |
