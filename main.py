@@ -15,8 +15,11 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route("/Upload_Data")
+@app.route("/Upload_Data", methods=['POST', 'GET'])
 def upload_data():
+    if request.method == 'POST':
+        studentData = request.files['student-data-upload']
+        companyData = request.files['company-data-upload']
     return render_template("upload_data.html")
 
 @app.route("/Match_Student")
