@@ -30,7 +30,8 @@ input[type=submit] {
     border: none;
     font-size: large;
     border-radius: 10px;
-    margin-left: 250px;
-    margin-top: 50px;
+    margin-left: 50px;
+    margin-top: 25px;
+    width: 515px;
     cursor: pointer;
 }
