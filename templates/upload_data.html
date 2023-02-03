@@ -22,7 +22,29 @@
         </header>
         <h1 class="title-text">Upload Data Page</h1>
         <hr class="title-black-line" />
-        <form method="post" id= "upload-data-form" enctype="multipart/form-data">
+        {% if result == "error" %}
+        <p style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
+        {% elif result == "success" %}
+        <p style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
+        {% endif %}
+
+
+        <!--{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes style="margin-left: 10px;">
+            {% for category, message in messages %}
+            {% if category == "error" %}
+            <li class="{{ category }}" style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; list-style-type: none;">{{ message }}</li>
+            {% else %}
+            <li class="{{ category }}" style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; list-style-type: none;">{{ message }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}-->
+
+
+        <form method="post" id="upload-data-form" enctype="multipart/form-data">
             <p style="margin-left: 50px; margin-bottom: 0px; font-size: large;"><b>Upload Student Data:</b></p>
             <input type="file" id="student-data-upload" name="student-data-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
 
@@ -32,5 +54,14 @@
             <br />
             <input type="submit" />
         </form>
+       
+        {% if success1 == True %}
+        <p style="margin-top: -188px; margin-left: 570px; color:forestgreen; position:absolute">*Uploaded</p>
+        {% endif %}
+
+        {% if success2 == True %}
+        <p style="margin-top: -95px; margin-left: 570px; color:forestgreen; position:absolute">*Uploaded</p>
+        {% endif %}
+
     </body>
 </html>
