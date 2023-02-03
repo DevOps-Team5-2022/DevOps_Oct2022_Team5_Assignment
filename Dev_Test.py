@@ -6,6 +6,7 @@ import os.path
 import main
 import Email
 import database_crud as db
+import pandas as pd
 
 def test_home_url():
     driver = webdriver.Chrome(service=ChromeService(executable_path=ChromeDriverManager().install()))
@@ -76,3 +77,15 @@ def test_delete_record():
 
 def test_delete_table():
     assert db.delete_table() == ('nonexist',)
+
+def test_successful_upload_student_data():
+    studentTestData = {'StudentID': ["S87654321A"], 'Name': ['Test1'], 'Preference': ['Testing'], 'Status': ['Unassigned']}
+    studentTestDataframe = pd.DataFrame(data = studentTestData)
+    result = main.upload_data_func(studentTestDataframe, 'student')
+    assert result == 'success'
+
+def test_successful_upload_company_data():
+    companyTestData = {'CompanyName': ["Test Company"], 'JobRole': ['Tester'], 'CompanyContact': ['Test User'], 'Email': ['test@gmail.com']}
+    companyTestDataframe = pd.DataFrame(data = companyTestData)
+    result = main.upload_data_func(companyTestDataframe, 'company')
+    assert result == 'success'
