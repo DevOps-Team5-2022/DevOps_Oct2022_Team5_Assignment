@@ -22,7 +22,7 @@ jobs:
           pip install webdriver-manager
           pip install Flask
           pip install independentsoft.msg
-          pip install mysql-python
+          pip install mysqlclient
           pip install mysql-connector-python
           pip install pandas
           pip install openpyxl
