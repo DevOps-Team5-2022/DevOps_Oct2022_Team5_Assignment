@@ -4,18 +4,22 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome import options
 from webdriver_manager.chrome import ChromeDriverManager
 import os.path
+from os import environ
 import main
 import Email
 import database_crud as db
 import pandas as pd
 
 chromeOption = options.Options()
-chromeOption.add_argument("--disable-dev-shm-usage")
-chromeOption.add_argument("--no-sandbox")
-chromeOption.add_argument('--remote-debugging-port=9222')
+for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-certificate-errors','--disable-extensions','--no-sandbox','--disable-dev-shm-usage']:
+    chromeOption.add_argument(option)
+#chromeOption.add_argument('--remote-debugging-port=9222')
 
-chromeOption.binary_location = "/usr/bin/google-chrome"
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options = chromeOption, executable_path="/usr/local/bin/chromedriver")
+#chromeOption.binary_location = "/usr/bin/google-chrome"
+#driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options = chromeOption, executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(service=ChromeService(environ['CHROMEWEBDRIVER']), options = chromeOption, executable_path="/usr/local/bin/chromedriver")
+
+
 
 def test_home_url():
     
