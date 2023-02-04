@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, flash
 import os
 import Email
 import mysql.connector
+import pytest
 import pandas as pd
 from sqlalchemy import create_engine
 
-emailDirPath = ""
-resumeDirPath = ""
 conn = mysql.connector.connect(user='root', password='root',
                               host='localhost',database='devops')
 
@@ -18,9 +17,6 @@ engine = create_engine("mysql://{user}:{pw}@{host}/{db}"
 
 cursor = conn.cursor()
 app = Flask(__name__)
-
-# required for using flash()
-app.config['SECRET_KEY'] = os.urandom(24)
 
 @app.route("/Main")
 def home():
@@ -56,10 +52,19 @@ def upload_data():
 
 @app.route("/Match_Student")
 def match_student():
-    cursor.execute("SELECT * FROM student")
-    result = cursor.fetchall()
-    cursor.execute("SELECT * FROM company")
-    results = cursor.fetchall()
+    try:
+        cursor.execute("SELECT * FROM student")
+    except:
+        result = None
+    else:
+        result = cursor.fetchall()
+
+    try:
+        cursor.execute("SELECT * FROM company")
+    except:
+        results = None
+    else:
+        results = cursor.fetchall()
     return render_template("match_student.html", student_data = result, company_data = results)
 
 @app.route("/Prepare_Email")
@@ -68,24 +73,23 @@ def prepare_email():
 
 @app.route("/Settings", methods=['POST', 'GET'])
 def settings():
-    global emailDirPath
-    global resumeDirPath
+    # gets directory from Database
+    cursor.execute("SELECT * FROM config")
+    configTuple = cursor.fetchall()
+    emailDirPath = configTuple[0][2]
+    resumeDirPath = configTuple[0][1]
+    
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
             emailDirPath = request.form.get("input-email-dir")
-            #if check_path_exists(emailDirPath):
+            #if os.path.isdir(emailDirPath):
                 # do smth
         elif 'submit-resume-dir-btn' in request.form:
             resumeDirPath = request.form.get("input-resume-dir")
-            #if check_path_exists(resumeDirPath):
+            #if os.path.isdir(resumeDirPath):
                 # do smth
 
-    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath)
-
-# function that checks if directory exists and returns bool 
-def check_path_exists(directory):
-    check = os.path.isdir(directory)
-    return check
+    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, test = configTuple)
 
 # function to try to upload data to database
 def upload_data_func(file, tableName):
