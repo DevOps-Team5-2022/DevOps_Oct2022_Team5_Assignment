@@ -96,13 +96,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: devTestResultsDev
-      - name: Calculate project metrics
-        id: projectmetrics
-        run: |
-          yarn
-          yarn build
-          SIZE=($(du -s dist/))
-          echo "::set-output name=code_size::$SIZE"
+#      - name: Calculate project metrics
+#        id: projectmetrics
+#        run: |
+#          yarn
+#          yarn build
+#          SIZE=($(du -s dist/))
+#          echo "::set-output name=code_size::$SIZE"
       - uses: floric/repo-monitor-action@v1.4.1
         name: Update Report
         with:
@@ -207,6 +207,13 @@ jobs:
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             QA pytest failed. Both QA & Dev please double check your codes for errors
                 - uses: actions/checkout@v2.3.1
+#      - name: Calculate project metrics
+#        id: projectmetrics
+#        run: |
+#          yarn
+#          yarn build
+#          SIZE=($(du -s dist/))
+#          echo "::set-output name=code_size::$SIZE"
       - uses: floric/repo-monitor-action@v1.4.1
         name: Update Report
         with:
