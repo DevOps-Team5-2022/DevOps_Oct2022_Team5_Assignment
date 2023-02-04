@@ -12,7 +12,10 @@ import pandas as pd
 chromeOption = options.Options()
 chromeOption.add_argument("--disable-dev-shm-usage")
 chromeOption.add_argument("--no-sandbox")
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options = chromeOption)
+chromeOption.add_argument('--remote-debugging-port=9222')
+
+chromeOption.binary_location = "/usr/bin/google-chrome"
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options = chromeOption, executable_path="/usr/local/bin/chromedriver")
 
 def test_home_url():
     
