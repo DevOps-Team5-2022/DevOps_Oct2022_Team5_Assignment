@@ -9,8 +9,8 @@ from independentsoft.msg import StoreSupportMask
 import os
 from datetime import datetime
 
-# string email, string recipientName, string beforeDate, string afterDate, string filePath
-def create_email(email, recipientName, beforeDate, afterDate, filePath):
+# string email, string recipientName, string beforeDate, string afterDate
+def create_email(email, recipientName, beforeDate, afterDate):
     message = Message()
     year =  beforeDate[-4:]
 
@@ -36,15 +36,18 @@ def create_email(email, recipientName, beforeDate, afterDate, filePath):
     message.message_flags.append(MessageFlag.UNSENT)
     #message.store_support_masks.append(StoreSupportMask.CREATE)
 
-    # save .msg
-    os.path.join(filePath, recipientName + ".msg")
-    #message.save(filePath + chr(92) + recipientName + ".msg")
+    return message
+
+def save_email(message, filePath):
     try:
-        message.save(os.path.join(filePath, recipientName + " Internship Email.msg"))
+        message.save(os.path.join(filePath, message.recipients[0].display_name + " Internship Email.msg"))
     except:
         return "fail"
     else:
         return "success"
 
 #create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "D:\\Documents")
+message = create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
+results = save_email(message, "D:\\Documents")
+print(results)
 
