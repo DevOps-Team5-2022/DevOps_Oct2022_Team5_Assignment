@@ -51,9 +51,9 @@ def test_settings_url():
     assert driver.title == "DevOps Team 5 Settings Page"
 
 def test_email_function():
-    Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "/home")
+    result = Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "/home")
 
-    assert os.path.exists("C:\\Tan Jun Jie Internship Email.msg") == True
+    assert result = 'success'
     
 def test_create_table():
     assert db.create_table() == ('exist',)
