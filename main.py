@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 import os
+from datetime import date
 import Email
 import mysql.connector
 import pytest
@@ -7,7 +8,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 conn = mysql.connector.connect(user='root', password='root',
-                              host='localhost',database='devops')
+                              host='localhost',database='devops', connect_timeout=1000)
 
 # this is for uploading excel data into the sql db, mysql.connector doesnt work
 engine = create_engine("mysql://{user}:{pw}@{host}/{db}"
@@ -91,17 +92,23 @@ def settings():
     # gets directory from Database
     cursor.execute("SHOW TABLES LIKE 'config'")
     checkExists = cursor.fetchall()
-    
-    if len(checkExists) > 0:
-        cursor.execute("SELECT * FROM config")
-        configTuple = cursor.fetchall()
-        emailDirPath = configTuple[0][2]
-        resumeDirPath = configTuple[0][1]
 
-    # if table doesnt exist/no row
-    else:
-        emailDirPath = ""
-        resumeDirPath = ""
+    # if table doesnt exist, create table and add demo record
+    if len(checkExists) == 0:
+        cursor.execute("CREATE TABLE config (ID int, resume_path text, email_path text, internship_period_start date, internship_period_end date)")
+        conn.commit()
+
+        today = date.today().strftime("%Y/%m/%d")
+        cursor.execute("INSERT INTO config (ID) VALUES (1)")
+        conn.commit()
+        cursor.execute("UPDATE config SET resume_path = (%s), email_path = (%s), internship_period_start = (%s), internship_period_end = (%s) WHERE ID = 1", (None, None, today, today))
+        conn.commit()
+        
+    cursor.execute("SELECT * FROM config")
+    configTuple = cursor.fetchall()
+
+    emailDirPath = configTuple[0][2]
+    resumeDirPath = configTuple[0][1]
     
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
