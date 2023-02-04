@@ -39,7 +39,12 @@ def create_email(email, recipientName, beforeDate, afterDate, filePath):
     # save .msg
     os.path.join(filePath, recipientName + ".msg")
     #message.save(filePath + chr(92) + recipientName + ".msg")
-    message.save(os.path.join(filePath, recipientName + " Internship Email.msg"))
+    try:
+        message.save(os.path.join(filePath, recipientName + " Internship Email.msg"))
+    except:
+        return "fail"
+    else:
+        return "success"
 
 #create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "D:\\Documents")
 
