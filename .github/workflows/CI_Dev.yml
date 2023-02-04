@@ -103,12 +103,12 @@ jobs:
 #          yarn build
 #          SIZE=($(du -s dist/))
 #          echo "::set-output name=code_size::$SIZE"
-      - uses: floric/repo-monitor-action@v1.4.1
-        name: Update Report
-        with:
-          key: code-size
-          value: ${{ steps.projectmetrics.outputs.code_size }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+#      - uses: floric/repo-monitor-action@v1.4.1
+#        name: Update Report
+#        with:
+#          key: code-size
+#          value: ${{ steps.projectmetrics.outputs.code_size }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
       
 
           
@@ -214,9 +214,9 @@ jobs:
 #          yarn build
 #          SIZE=($(du -s dist/))
 #          echo "::set-output name=code_size::$SIZE"
-      - uses: floric/repo-monitor-action@v1.4.1
-        name: Update Report
-        with:
-          key: code-size
-          value: ${{ steps.projectmetrics.outputs.code_size }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+#      - uses: floric/repo-monitor-action@v1.4.1
+#        name: Update Report
+#        with:
+#          key: code-size
+#          value: ${{ steps.projectmetrics.outputs.code_size }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
