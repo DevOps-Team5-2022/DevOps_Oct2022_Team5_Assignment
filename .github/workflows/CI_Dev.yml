@@ -17,20 +17,13 @@ jobs:
       - name: Install Libraries
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-cov
-          pip install selenium
-          pip install webdriver-manager
-          pip install Flask
-          pip install independentsoft.msg
-          pip install mysqlclient
-          pip install mysql-connector-python
-          pip install pandas
-          pip install openpyxl
-          pip install SQLAlchemy
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          pip install flake8 pytest pytest-cov selenium webdriver-manager Flask independentsoft.msg mysqlclient mysql-connector-python pandas openpyxl SQLAlchemy
+      - name: Remove Chrome
+        run: sudo apt purge google-chrome-stable
+      - name: Remove default Chromium
+        run: sudo apt purge chromium-browser
+      - name: Install a new Chromium
+        run: sudo apt install -y chromium-browser
       - name: Install MySQL Server
         run: |
           sudo apt-get update
