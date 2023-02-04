@@ -136,6 +136,10 @@ jobs:
           pip install webdriver-manager
           pip install Flask
           pip install independentsoft.msg
+          pip install mysql-connector-python
+          pip install pandas
+          pip install openpyxl
+          pip install SQLAlchemy
       - name: Install Chrome
         run: |
           sudo apt-get update
