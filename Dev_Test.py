@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome import options
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
 import os.path
 from os import environ
 import main
@@ -11,13 +10,11 @@ import Email
 import database_crud as db
 import pandas as pd
 
-chromeService = ChromeService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
-
 chromeOption = options.Options()
 for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-certificate-errors','--disable-extensions','--no-sandbox','--disable-dev-shm-usage']:
     chromeOption.add_argument(option)
 
-driver = webdriver.Chrome(service = chromeService, options = chromeOption, executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(options = chromeOption)
 
 
 def test_home_url():
