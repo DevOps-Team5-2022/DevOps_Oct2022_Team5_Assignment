@@ -63,7 +63,7 @@ def match_student():
 
     # if student table doesn't exists
     else:
-        result = None
+        result = ()
 
     # get all data from company table
     cursor.execute("SHOW TABLES LIKE 'company'")
@@ -75,7 +75,7 @@ def match_student():
 
     # if company table doesn't exists
     else:  
-        resuls = None
+        resuls = ()
     
     return render_template("match_student.html", student_data = result, company_data = results)
 
