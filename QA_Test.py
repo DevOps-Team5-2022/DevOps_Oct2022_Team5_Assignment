@@ -68,6 +68,94 @@ def test_goToUploadDataPage():
 
     driver.quit()
 
+def test_goToUploadDataPage_Fail1():
+    options = Options()
+    options.add_argument('--headless')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    upload_data_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Match Student Page"
+
+    driver.quit()
+
+def test_goToUploadDataPage_Fail2():
+    options = Options()
+    options.add_argument('--headless')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    upload_data_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Prepare Email Page"
+
+    driver.quit()
+
+def test_goToUploadDataPage_Fail3():
+    options = Options()
+    options.add_argument('--headless')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    upload_data_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[1]/a')
+    
+    #Upload Data button is clicked
+    upload_data_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Settings Page"
+
+    driver.quit()
+
+
 #test if clicking the "Prepare Email" button on the nav bar opens the correct oage
 def test_goToPrepareEmailPage():
     options = Options()
@@ -97,6 +185,95 @@ def test_goToPrepareEmailPage():
     assert target_title == "DevOps Team 5 Prepare Email Page"
 
     driver.quit()
+
+def test_goToPrepareEmailPage_Fail1():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    prepare_email_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[3]/a')
+    
+    #Upload Data button is clicked
+    prepare_email_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.quit()
+
+def test_goToPrepareEmailPage_Fail2():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    prepare_email_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[3]/a')
+    
+    #Upload Data button is clicked
+    prepare_email_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Match Student Page"
+
+    driver.quit()
+
+def test_goToPrepareEmailPage_Fail3():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    prepare_email_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[3]/a')
+    
+    #Upload Data button is clicked
+    prepare_email_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Settings Page"
+
+    driver.quit()
+
+
 
 #test if clicking the "Match Student" button on the nav bar opens the correct oage
 def test_goToMatchStudentPage():
@@ -128,6 +305,94 @@ def test_goToMatchStudentPage():
 
     driver.quit()
 
+def test_goToMatchStudentPage_Fail1():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.quit()
+
+def test_goToMatchStudentPage_Fail2():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Prepare Email Page"
+
+    driver.quit()
+
+def test_goToMatchStudentPage_Fail3():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Settings Page"
+
+    driver.quit()
+
+
 #test if clicking the "Settings" button on the nav bar opens the correct oage
 def test_goToSettingsPage():
     options = Options()
@@ -157,6 +422,95 @@ def test_goToSettingsPage():
     assert target_title == "DevOps Team 5 Settings Page"
 
     driver.quit()
+
+def test_goToSettingsPage_Fail1():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a')
+    
+    #Upload Data button is clicked
+    settings_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    driver.quit()
+
+def test_goToSettingsPage_Fail2():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a')
+    
+    #Upload Data button is clicked
+    settings_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Prepare Email Page"
+
+    driver.quit()
+
+def test_goToSettingsPage_Fail3():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+
+    driver.implicitly_wait(0.5)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    settings_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[4]/a')
+    
+    #Upload Data button is clicked
+    settings_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Match Student Page"
+
+    driver.quit()
+
+
 
 #test if student data is uploaded successfully
 def test_uploadStudentData():
