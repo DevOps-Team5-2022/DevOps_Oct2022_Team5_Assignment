@@ -47,7 +47,7 @@ def save_email(message, filePath):
         return "success"
 
 #create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "D:\\Documents")
-message = create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
-results = save_email(message, "D:\\Documents")
-print(results)
+#message = create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
+#results = save_email(message, "D:\\Documents")
+#print(results)
 
