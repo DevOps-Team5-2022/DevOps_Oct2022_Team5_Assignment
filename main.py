@@ -52,19 +52,31 @@ def upload_data():
 
 @app.route("/Match_Student")
 def match_student():
-    try:
+    
+    # get all data from student table
+    cursor.execute("SHOW TABLES LIKE 'student'")
+    checkExists = cursor.fetchall()
+    # if student table exists
+    if len(checkExists) > 0:
         cursor.execute("SELECT * FROM student")
-    except:
-        result = None
-    else:
         result = cursor.fetchall()
 
-    try:
-        cursor.execute("SELECT * FROM company")
-    except:
-        results = None
+    # if student table doesn't exists
     else:
+        result = None
+
+    # get all data from company table
+    cursor.execute("SHOW TABLES LIKE 'company'")
+    checkExists = cursor.fetchall()
+    # if company table exists
+    if len(checkExists) > 0:
+        cursor.execute("SELECT * FROM company")
         results = cursor.fetchall()
+
+    # if company table doesn't exists
+    else:  
+        resuls = None
+    
     return render_template("match_student.html", student_data = result, company_data = results)
 
 @app.route("/Prepare_Email")
@@ -74,10 +86,19 @@ def prepare_email():
 @app.route("/Settings", methods=['POST', 'GET'])
 def settings():
     # gets directory from Database
-    cursor.execute("SELECT * FROM config")
-    configTuple = cursor.fetchall()
-    emailDirPath = configTuple[0][2]
-    resumeDirPath = configTuple[0][1]
+    cursor.execute("SHOW TABLES LIKE 'config'")
+    checkExists = cursor.fetchall()
+    
+    if len(checkExists) > 0:
+        cursor.execute("SELECT * FROM config")
+        configTuple = cursor.fetchall()
+        emailDirPath = configTuple[0][2]
+        resumeDirPath = configTuple[0][1]
+
+    # if table doesnt exist/no row
+    else:
+        emailDirPath = ""
+        resumeDirPath = ""
     
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
@@ -89,7 +110,7 @@ def settings():
             #if os.path.isdir(resumeDirPath):
                 # do smth
 
-    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, test = configTuple)
+    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath)
 
 # function to try to upload data to database
 def upload_data_func(file, tableName):
