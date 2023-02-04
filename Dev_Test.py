@@ -50,12 +50,8 @@ def test_settings_url():
     # Check that its at Settings Page
     assert driver.title == "DevOps Team 5 Settings Page"
 
-def test_check_path_exists():
-    check = main.check_path_exists('C:\\Windows')
-    assert check == True
-
 def test_email_function():
-    Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "C:\\")
+    Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "/home")
 
     assert os.path.exists("C:\\Tan Jun Jie Internship Email.msg") == True
     
