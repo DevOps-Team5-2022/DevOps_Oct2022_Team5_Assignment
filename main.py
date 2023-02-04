@@ -85,6 +85,9 @@ def prepare_email():
 
 @app.route("/Settings", methods=['POST', 'GET'])
 def settings():
+    check = [False, False]
+    valid = [False, False]
+    
     # gets directory from Database
     cursor.execute("SHOW TABLES LIKE 'config'")
     checkExists = cursor.fetchall()
@@ -103,14 +106,25 @@ def settings():
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
             emailDirPath = request.form.get("input-email-dir")
-            #if os.path.isdir(emailDirPath):
-                # do smth
+            if os.path.isdir(emailDirPath):
+                valid[0] = True
+                cursor.execute("UPDATE config SET email_path = (%s) WHERE ID = (%s)", (emailDirPath, 1))
+                conn.commit()
+            else:
+                valid[0] = False
+
+            check[0] = True
         elif 'submit-resume-dir-btn' in request.form:
             resumeDirPath = request.form.get("input-resume-dir")
-            #if os.path.isdir(resumeDirPath):
-                # do smth
+            if os.path.isdir(resumeDirPath):
+                valid[1] = True
+                cursor.execute("UPDATE config SET resume_path = (%s) WHERE ID = (%s)", (resumeDirPath, 1))
+                conn.commit()
+            else:
+                valid[1] = False
+            check[1] = True
 
-    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath)
+    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, check = check, valid = valid)
 
 # function to try to upload data to database
 def upload_data_func(file, tableName):
