@@ -123,20 +123,20 @@ jobs:
           python-version: 3.11          
       - name: Install Libraries
         run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-cov
-          pip install selenium
-          pip install webdriver-manager
-          pip install Flask
-          pip install independentsoft.msg
-          pip install mysql-connector-python
-          pip install pandas
-          pip install openpyxl
-          pip install SQLAlchemy
+          pip install flake8 pytest pytest-cov selenium webdriver-manager Flask independentsoft.msg mysqlclient mysql-connector-python pandas openpyxl SQLAlchemy
+      - name: setup-chromedriver
+        uses: nanasess/setup-chromedriver@v1.1.0
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          
+      - name: Install MySQL Server
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-server
+          sudo systemctl start mysql
+          sudo systemctl status mysql
 
       - name: Checkout own repo
         uses: actions/checkout@v3
@@ -152,6 +152,11 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Create DevOps db & tables
+        run: |
+          mysql -u root -p"root" -e 'SELECT version()'
+          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql -u root -p"root" -e "SHOW DATABASES"
       - name: Run Flask
         run: |
           python main.py &
