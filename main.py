@@ -109,6 +109,9 @@ def settings():
 
     emailDirPath = configTuple[0][2]
     resumeDirPath = configTuple[0][1]
+
+    startDate, endDate = date_to_str(configTuple[0][3], configTuple[0][4])
+
     
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
@@ -131,7 +134,18 @@ def settings():
                 valid[1] = False
             check[1] = True
 
-    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, check = check, valid = valid)
+        elif 'submit-internship-period-btn' in request.form:
+            startDate = request.form.get("inputted-start-date")
+            endDate = request.form.get("inputted-end-date")
+
+            cursor.execute("UPDATE config SET internship_period_start = (%s), internship_period_end = (%s) WHERE ID = 1", (startDate, endDate))
+            conn.commit()
+
+            startDate = startDate[8:] + "/" + startDate[5:7] + "/" + startDate[0:4]
+            endDate = endDate[8:] + "/" + endDate[5:7] + "/" + endDate[0:4]
+            
+        
+    return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, startDate = startDate, endDate = endDate, check = check, valid = valid)
 
 # function to try to upload data to database
 def upload_data_func(file, tableName):
@@ -145,6 +159,41 @@ def upload_data_func(file, tableName):
         # success with uploading
         return 'success'
         flash('Upload Successful!')
+
+def date_to_str(startDate, endDate):
+    startDay = startDate.day
+    startMonth = startDate.month
+    startYear = str(startDate.year)
+    if startDay < 10:
+        startDay = "0" + str(startDay)
+    else:
+        startDay = str(startDay)
+
+    if startMonth < 10:
+        startMonth = "0" + str(startMonth)
+    else:
+        startMonth = str(startMonth)
+    
+
+    endDay = endDate.day
+    endMonth = endDate.month
+    endYear = str(endDate.year)
+    if endDay < 10:
+        endDay = "0" + str(endDay)
+    else:
+        endDay = str(endDay)
+
+    if endMonth < 10:
+        endMonth = "0" + str(endMonth)
+    else:
+        endMonth = str(endMonth)
+    
+    finalStartDate = startDay + "/" + startMonth + "/" + startYear
+    finalEndDate = endDay + "/" + endMonth + "/" + endYear
+
+    return finalStartDate, finalEndDate
+
+
 
 if __name__ == '__main__':
     #host is to set the localhost IP Address, port is to set the port
