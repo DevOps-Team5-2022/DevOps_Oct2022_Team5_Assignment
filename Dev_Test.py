@@ -87,4 +87,16 @@ def test_successful_upload_company_data():
     result = main.upload_data_func(companyTestDataframe, 'company')
     assert result == 'success'
 
+def test_diff_column_upload_student_data():
+    studentTestData = {'student id': ["S87654321A"], 'name': ['Test1'], 'preference': ['Testing'], 'status': ['Unassigned']}
+    studentTestDataframe = pd.DataFrame(data = studentTestData)
+    result = main.upload_data_func(studentTestDataframe, 'student')
+    assert result == 'error'
+
+def test_diff_column_upload_company_data():
+    companyTestData = {'company name': ["Test Company"], 'job role': ['Tester'], 'company contact': ['Test User'], 'email': ['test@gmail.com']}
+    companyTestDataframe = pd.DataFrame(data = companyTestData)
+    result = main.upload_data_func(companyTestDataframe, 'company')
+    assert result == 'error'
+
 
