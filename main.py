@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash
 import os
 from datetime import date
 import Email
+import functions
 import mysql.connector
 import pytest
 import pandas as pd
@@ -31,36 +32,16 @@ def upload_data():
     if request.method == 'POST':
         studentData = request.files['student-data-upload']
         companyData = request.files['company-data-upload']
-        if studentData.filename != '':
-            # check that file is an Excel file
-            studentExtension = studentData.filename.split(".")[1]
-            if studentExtension == "csv" or studentExtension == "xlsx" or studentExtension == "xls": 
-                studentDataDF = pd.read_excel(studentData)
-                #check if uploaded excel is empty
-                if studentDataDF.empty:
-                    msg = 'error'
-                else:
-                    msg = upload_data_func(studentDataDF, 'student')
-            else:
-                msg = 'error'
-
+        if studentData.filename != "":
+            msg = functions.validate_upload_file(studentData, studentData.filename, 'student', engine)
             if msg == 'success':
                 sDataSuccess = True
             else:
-                sDataSuccess = False
+                sDataSuccess = False    
             
         if companyData.filename != '':
+            msg = functions.validate_upload_file(companyData, companyData.filename, 'company', engine)
             companyExtension = companyData.filename.split(".")[1]
-            if companyExtension == "csv" or companyExtension == "xlsx" or companyExtension == "xls": 
-                companyDataDF = pd.read_excel(companyData)
-                # check if uploaded excel is empty
-                if companyDataDF.empty:
-                    msg = 'error'
-                else:
-                    msg = upload_data_func(companyDataDF, 'company')
-            else:
-                msg = 'error'
-                
             if msg == 'success':
                 cDataSuccess = True
             else:
@@ -128,7 +109,7 @@ def settings():
     emailDirPath = configTuple[0][2]
     resumeDirPath = configTuple[0][1]
 
-    startDate, endDate = date_to_str(configTuple[0][3], configTuple[0][4])
+    startDate, endDate = functions.date_to_str(configTuple[0][3], configTuple[0][4])
 
     
     if request.method == 'POST':
@@ -164,53 +145,6 @@ def settings():
             
         
     return render_template("settings.html", emailPath = emailDirPath, resumePath = resumeDirPath, startDate = startDate, endDate = endDate, check = check, valid = valid)
-
-# function to try to upload data to database
-def upload_data_func(file, tableName):
-    try:
-        file.to_sql(tableName, engine, if_exists='append', index = False)
-    except:
-        # error with uploading
-        return 'error'
-        flash('Invalid Table Format', 'error')
-    else:
-        # success with uploading
-        return 'success'
-        flash('Upload Successful!')
-
-def date_to_str(startDate, endDate):
-    startDay = startDate.day
-    startMonth = startDate.month
-    startYear = str(startDate.year)
-    if startDay < 10:
-        startDay = "0" + str(startDay)
-    else:
-        startDay = str(startDay)
-
-    if startMonth < 10:
-        startMonth = "0" + str(startMonth)
-    else:
-        startMonth = str(startMonth)
-    
-
-    endDay = endDate.day
-    endMonth = endDate.month
-    endYear = str(endDate.year)
-    if endDay < 10:
-        endDay = "0" + str(endDay)
-    else:
-        endDay = str(endDay)
-
-    if endMonth < 10:
-        endMonth = "0" + str(endMonth)
-    else:
-        endMonth = str(endMonth)
-    
-    finalStartDate = startDay + "/" + startMonth + "/" + startYear
-    finalEndDate = endDay + "/" + endMonth + "/" + endYear
-
-    return finalStartDate, finalEndDate
-
 
 
 if __name__ == '__main__':
