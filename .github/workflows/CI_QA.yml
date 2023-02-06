@@ -55,7 +55,12 @@ jobs:
           sudo cp -rp ./mysqld ./mysqld.bak
           sudo /etc/init.d/mysql stop
           sudo mv ./mysqld.bak ./mysqld
-          sudo mysqld_safe --skip-grant-tables        
+          sudo mysqld_safe --skip-grant-tables &
+          mysql -u root -p"root"
+          use mysql;
+          update user set authentication_string=PASSWORD("mynewpassword") where User='root';
+          flush privileges;
+          quit
           
       - name: Create DevOps db & tables
         run: |
