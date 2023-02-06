@@ -42,7 +42,7 @@ def test_wrongFileType_uploadCompanyData():
     assert target_title == "DevOps Team 5 Upload Data Page"
     driver.implicitly_wait(3)
 
-    chooseFile = driver.find_element("xpath", "//*[@id='company-data-upload']")
+    chooseFile = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
     submitButton = driver.find_element("xpath",'//*[@id="upload-data-form"]/input[3]')
 
     driver.implicitly_wait(3)
