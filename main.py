@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, flash
 import os
 from datetime import date
-import Email
 import functions
 import mysql.connector
 import pytest
