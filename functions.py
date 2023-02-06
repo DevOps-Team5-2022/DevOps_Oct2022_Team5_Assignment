@@ -73,6 +73,37 @@ def date_to_str(startDate, endDate):
 
     return finalStartDate, finalEndDate
 
+# initialize config table in database
+def init_config_table(conn, cursor):
+    cursor.execute("CREATE TABLE config (ID int, resume_path text, email_path text, internship_period_start date, internship_period_end date)")
+    conn.commit()
+
+    today = datetime.today().strftime("%Y/%m/%d")
+    cursor.execute("INSERT INTO config (ID) VALUES (1)")
+    conn.commit()
+    cursor.execute("UPDATE config SET resume_path = (%s), email_path = (%s), internship_period_start = (%s), internship_period_end = (%s) WHERE ID = 1", (None, None, today, today))
+    conn.commit()
+
+# update config table with new inputted directory
+def update_directory(tableType, directoryPath, cursor, conn):
+    if tableType == "email":
+        if os.path.isdir(directoryPath):
+            cursor.execute("UPDATE config SET email_path = (%s) WHERE ID = (%s)", (directoryPath, 1))
+            conn.commit()
+            result = 'success'
+        else:
+            result = 'error'
+
+    elif tableType == "resume":
+        if os.path.isdir(directoryPath):
+            cursor.execute("UPDATE config SET resume_path = (%s) WHERE ID = (%s)", (directoryPath, 1))
+            conn.commit()
+            result = 'success'
+        else:
+            result = 'error'       
+
+    return result
+
 # string email, string recipientName, string beforeDate, string afterDate
 def create_email(email, recipientName, beforeDate, afterDate):
     message = Message()

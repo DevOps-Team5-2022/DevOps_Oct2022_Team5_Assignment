@@ -93,14 +93,7 @@ def settings():
 
     # if table doesnt exist, create table and add demo record
     if len(checkExists) == 0:
-        cursor.execute("CREATE TABLE config (ID int, resume_path text, email_path text, internship_period_start date, internship_period_end date)")
-        conn.commit()
-
-        today = date.today().strftime("%Y/%m/%d")
-        cursor.execute("INSERT INTO config (ID) VALUES (1)")
-        conn.commit()
-        cursor.execute("UPDATE config SET resume_path = (%s), email_path = (%s), internship_period_start = (%s), internship_period_end = (%s) WHERE ID = 1", (None, None, today, today))
-        conn.commit()
+        functions.init_config_table(conn, cursor)
         
     cursor.execute("SELECT * FROM config")
     configTuple = cursor.fetchall()
@@ -114,22 +107,21 @@ def settings():
     if request.method == 'POST':
         if 'submit-email-dir-btn' in request.form:
             emailDirPath = request.form.get("input-email-dir")
-            if os.path.isdir(emailDirPath):
+            msg = functions.update_directory("email", emailDirPath, cursor, conn)
+            if msg == 'success':
                 valid[0] = True
-                cursor.execute("UPDATE config SET email_path = (%s) WHERE ID = (%s)", (emailDirPath, 1))
-                conn.commit()
             else:
                 valid[0] = False
 
             check[0] = True
         elif 'submit-resume-dir-btn' in request.form:
             resumeDirPath = request.form.get("input-resume-dir")
-            if os.path.isdir(resumeDirPath):
+            msg = functions.update_directory("resume", resumeDirPath, cursor, conn)
+            if msg == 'success':
                 valid[1] = True
-                cursor.execute("UPDATE config SET resume_path = (%s) WHERE ID = (%s)", (resumeDirPath, 1))
-                conn.commit()
             else:
                 valid[1] = False
+
             check[1] = True
 
         elif 'submit-internship-period-btn' in request.form:
