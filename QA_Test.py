@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
 
 #set site's localhost IP Address and port
@@ -224,7 +225,7 @@ def test_uploadStudentData():
     totalRows = student_table.findElements(By.tagName("tr"))
 
     dataFound = False
-    found = [False] * studentDataFileName.count()
+    found = [False] * studentData.count()
     #find the student data, if found, set dataFound to true
     for s in studentData:
         for row in totalRows:
@@ -244,6 +245,8 @@ def test_uploadStudentData():
     
     if dataFound == False:
         print("Error! Student Data was not uploaded successfully!")
+
+    assert dataFound == True
 
     driver.quit()
 
@@ -285,7 +288,7 @@ def test_uploadStudentData_Invalid():
 
     #check if the right file is uploaded
     file_upload_message = driver.find_element(by=By.ID, value="upload-student-data-error-message").text
-    assert file_upload_message + "Error uploading student data"
+    assert file_upload_message + "Error"
 
     driver.implicitly_wait(2)
 
@@ -310,7 +313,7 @@ def test_uploadStudentData_Invalid():
     studentData = getStudentInfo(studentDataFileName)
 
     dataFound = False
-    found = [False] * studentDataFileName.count()
+    found = [False] * studentData.count()
     #find the student data, if found, set dataFound to true
     for s in studentData:
         for row in totalRows:
@@ -330,6 +333,8 @@ def test_uploadStudentData_Invalid():
     
     if dataFound == False:
         print("Error! Student Data was not uploaded successfully!")
+
+    assert dataFound == False
 
     driver.quit()
 
@@ -391,6 +396,31 @@ def test_uploadCompanyData():
 
     driver.implicitly_wait(0.5)
 
+    companyData = getCompanyInfo(companyDataFileName)
+
+    company_table = driver.findElement(By.id("View"));
+    #get the size of the list of the rows
+    totalRows = company_table.findElements(By.tagName("tr"))
+    targetRow = totalRows[0]
+    companyOptions = Select(targetRow.findElements(By.ID, "companyOptions")).options
+    foundList = [False] * companyData.count()
+    for company in companyData:
+        for option in companyOptions:
+            if company == option.text:
+                index = companyData.index(company)
+                foundList[index] = True
+    
+    dataFound = False
+    for found in foundList:
+        if found == False:
+            dataFound == False
+            break;
+        else:
+            dataFound = True
+    
+    assert dataFound == True;
+
+
     driver.quit()
     
 def test_wrongFileType_uploadCompanyData():
@@ -415,6 +445,46 @@ def test_wrongFileType_uploadCompanyData():
 
     submitMsg = driver.find_element("xpath", '//*[@id="file-msg"]')
 
-    assert submitMsg.text == "Upload Failed. Invalid Format"
+    assert submitMsg.text == "Error"
+
+    driver.implicitly_wait(2)
+
+    #find the button to enter Upload Data page, subdue to naming changes
+    match_student_button = driver.find_element("xpath",'/html/body/header/div/strong/nav/ul/li[2]/a')
+    
+    #Upload Data button is clicked
+    match_student_button.click()
+
+    driver.implicitly_wait(0.5)
+    
+    #checks if the Upload Data pahe is loaded
+    target_title2 = driver.title
+    assert target_title2 == "DevOps Team 5 Match Student Page"
+
+    driver.implicitly_wait(0.5)
+
+    companyData = getCompanyInfo(companyDataFileName)
+
+    company_table = driver.findElement(By.id("View"));
+    #get the size of the list of the rows
+    totalRows = company_table.findElements(By.tagName("tr"))
+    targetRow = totalRows[0]
+    companyOptions = Select(targetRow.findElements(By.ID, "companyOptions")).options
+    foundList = [False] * companyData.count()
+    for company in companyData:
+        for option in companyOptions:
+            if company == option.text:
+                index = companyData.index(company)
+                foundList[index] = True
+    
+    dataFound = False
+    for found in foundList:
+        if found == False:
+            dataFound == False
+            break;
+        else:
+            dataFound = True
+    
+    assert dataFound == True;
 
     driver.quit()
