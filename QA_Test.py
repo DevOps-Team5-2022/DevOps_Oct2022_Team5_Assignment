@@ -17,7 +17,9 @@ print(selenium.__version__)
 
 # Kevin's test cases
 def test_wrongFileType_uploadCompanyData():
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    options = Options()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
 
     driver.get(siteIPAddress + "/Upload_Data")
 
