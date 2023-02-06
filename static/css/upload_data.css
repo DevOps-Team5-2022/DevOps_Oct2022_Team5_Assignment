@@ -35,3 +35,14 @@ input[type=submit] {
     width: 515px;
     cursor: pointer;
 }
+
+.file-upload-error-txt {
+    color: white;
+    border-radius: 5px;
+    width: 680px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    margin-left: 50px;
+    margin-top: 5px
+}

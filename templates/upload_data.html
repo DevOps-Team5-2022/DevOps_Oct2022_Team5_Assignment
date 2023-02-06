@@ -24,9 +24,9 @@
         <hr class="title-black-line" />
 
         {% if result == "error" %}
-        <p id="file-upload-error-txt" style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
+        <p id="file-upload-error-txt" class="file-upload-error-txt" style="background-color: red;">Upload Failed. Invalid Format</p>
         {% elif result == "success" %}
-        <p id="file-upload-error-txt" style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
+        <p id="file-upload-error-txt" class="file-upload-error-txt" style="background-color: green;">Upload Successful!</p>
         {% endif %}
 
 
