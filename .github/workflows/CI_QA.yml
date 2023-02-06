@@ -51,14 +51,11 @@ jobs:
           ls
       - name: Remove root password
         run: |
+          cd /var/run 
+          ls
           sudo /etc/init.d/mysql stop
-          sudo mysqld_safe --skip-grant-tables &
-          use mysql;
-          update user set authentication_string=PASSWORD("mynewpassword") where User='root';
-          flush privileges;
-          quit
-          sudo /etc/init.d/mysql stop
-          sudo /etc/init.d/mysql start
+          cd /var/run 
+          ls          
           
       - name: Create DevOps db & tables
         run: |
