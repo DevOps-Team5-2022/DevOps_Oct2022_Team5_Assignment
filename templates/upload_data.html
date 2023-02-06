@@ -22,26 +22,12 @@
         </header>
         <h1 class="title-text">Upload Data Page</h1>
         <hr class="title-black-line" />
+
         {% if result == "error" %}
-        <p style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
+        <p id="file-upload-error-txt" style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
         {% elif result == "success" %}
-        <p style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
+        <p id="file-upload-error-txt" style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
         {% endif %}
-
-
-        <!--{% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul class=flashes style="margin-left: 10px;">
-            {% for category, message in messages %}
-            {% if category == "error" %}
-            <li class="{{ category }}" style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; list-style-type: none;">{{ message }}</li>
-            {% else %}
-            <li class="{{ category }}" style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; list-style-type: none;">{{ message }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}-->
 
 
         <form method="post" id="upload-data-form" enctype="multipart/form-data">
@@ -50,7 +36,6 @@
 
             <p style="margin-left: 50px; margin-bottom: 0px; font-size: large;"><b>Upload Company Data:</b></p>
             <input type="file" id="company-data-upload" name="company-data-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
-
             <br />
             <input type="submit" />
         </form>
