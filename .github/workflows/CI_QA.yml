@@ -51,11 +51,11 @@ jobs:
           ls
       - name: Remove root password
         run: |
-          cd /var/run 
-          ls
+          cd /var/run
+          sudo cp -rp ./mysqld ./mysqld.bak
           sudo /etc/init.d/mysql stop
-          cd /var/run 
-          ls          
+          sudo mv ./mysqld.bak ./mysqld
+          sudo mysqld_safe --skip-grant-tables        
           
       - name: Create DevOps db & tables
         run: |
