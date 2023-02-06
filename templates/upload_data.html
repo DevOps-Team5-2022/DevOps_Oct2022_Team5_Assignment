@@ -3,6 +3,7 @@
     <head>
         <title>DevOps Team 5 Upload Data Page</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/upload_data.css')}}">
     </head>
     <body>
         <header>
@@ -21,5 +22,31 @@
         </header>
         <h1 class="title-text">Upload Data Page</h1>
         <hr class="title-black-line" />
+
+        {% if result == "error" %}
+        <p id="file-upload-error-txt" class="file-upload-error-txt" style="background-color: red;">Upload Failed. Invalid Format</p>
+        {% elif result == "success" %}
+        <p id="file-upload-error-txt" class="file-upload-error-txt" style="background-color: green;">Upload Successful!</p>
+        {% endif %}
+
+
+        <form method="post" id="upload-data-form" enctype="multipart/form-data">
+            <p style="margin-left: 50px; margin-bottom: 0px; font-size: large;"><b>Upload Student Data:</b></p>
+            <input type="file" id="student-data-upload" name="student-data-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+            <p style="margin-left: 50px; margin-bottom: 0px; font-size: large;"><b>Upload Company Data:</b></p>
+            <input type="file" id="company-data-upload" name="company-data-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+            <br />
+            <input type="submit" />
+        </form>
+       
+        {% if success1 == True %}
+        <p style="margin-top: -188px; margin-left: 570px; color:forestgreen; position:absolute">*Uploaded</p>
+        {% endif %}
+
+        {% if success2 == True %}
+        <p style="margin-top: -95px; margin-left: 570px; color:forestgreen; position:absolute">*Uploaded</p>
+        {% endif %}
+
     </body>
 </html>
