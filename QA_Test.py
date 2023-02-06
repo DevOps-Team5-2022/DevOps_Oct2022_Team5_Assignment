@@ -22,7 +22,7 @@ def test_goToMainPage():
     options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
-    driver.get(siteIPAddress + "/Main")
+    driver.get(siteIPAddress + "/Upload_Data")
 
     #checks if the home pahe is loaded
     title = driver.title
@@ -33,7 +33,8 @@ def test_wrongFileType_uploadCompanyData():
     options = Options()
     options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
-    driver.get(siteIPAddress + "/Upload_Data")
+
+    driver.get(siteIPAddress + "/Main")
 
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
