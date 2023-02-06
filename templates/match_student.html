@@ -10,6 +10,7 @@
                 <strong>
                     <nav>
                         <ul class="menu">
+                            <li><a href="{{ url_for('home') }}">Home</a></li>
                             <li><a href="{{ url_for('upload_data') }}">Upload Data</a></li>
                             <li><a href="{{ url_for('match_student') }}">Match Students</a></li>
                             <li><a href="{{ url_for('prepare_email') }}">Prepare Emails</a></li>
@@ -21,7 +22,7 @@
         </header>
         <h1 class="title-text">Match Students Page</h1>
         <hr class="title-black-line" />
-        <table border="1" id="table">
+        <table border="1" id="table" style="margin-left:50px; margin-top: 15px;">
             <thead>
             <tr>
                 <th>Name</th>
