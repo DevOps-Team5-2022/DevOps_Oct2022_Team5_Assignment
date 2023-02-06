@@ -109,7 +109,7 @@ def test_diff_column_upload_company_data():
     assert result == 'error'
 
 # validate that directory exists before saving to database
-def validate_successful_email_directory_path():
+def test_successful_validate_email_dir():
     # gets directory from Database
     cursor.execute("SHOW TABLES LIKE 'config'")
     checkExists = cursor.fetchall()
@@ -121,7 +121,7 @@ def validate_successful_email_directory_path():
     result = functions.update_directory('email', "/usr/bin", cursor, conn)
     assert result == 'success'
 
-def validate_successful_resume_directory_path():
+def test_successful_validate_resume_dir():
         # gets directory from Database
     cursor.execute("SHOW TABLES LIKE 'config'")
     checkExists = cursor.fetchall()
