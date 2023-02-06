@@ -105,7 +105,7 @@ def update_directory(columnName, directoryPath, cursor, conn):
     return result
 
 # string email, string recipientName, string beforeDate, string afterDate
-def create_email(email, recipientName, beforeDate, afterDate):
+def create_email(email, recipientName, beforeDate, afterDate, filePath):
     message = Message()
     year =  beforeDate[-4:]
 
@@ -131,12 +131,10 @@ def create_email(email, recipientName, beforeDate, afterDate):
     message.message_flags.append(MessageFlag.UNSENT)
     #message.store_support_masks.append(StoreSupportMask.CREATE)
 
-    return message
-
-def save_email(message, filePath):
     try:
         message.save(os.path.join(filePath, message.recipients[0].display_name + " Internship Email.msg"))
     except:
         return "fail"
     else:
         return "success"
+
