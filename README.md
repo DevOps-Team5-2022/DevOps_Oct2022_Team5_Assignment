@@ -53,7 +53,6 @@ PR will run a CI to test the code again and notify the team that a new bunch of 
 
 ### Change requirement strategy
 1. Informing of the scrum master and the tech lead of the required changes of the requirements.
-2. Communicate the reason of why there is a need for change of requirements and to be truthful about why it has to be done. There should also be explaination in why this change would result in better end goal.
 3. Leverage the Change Requirement Timeline which are our sprints. Before we change, make sure that everyone that is affected by the change know about it and to set and communicate goals to relate directly to the change of requirement.
 4. After discussion, scrum master and tech lead must approve of the changes of the requirements before proceeding with the changes.
 
