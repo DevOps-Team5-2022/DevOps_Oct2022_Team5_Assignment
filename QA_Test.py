@@ -19,8 +19,6 @@ print(selenium.__version__)
 def test_goToMainPage():
     options = Options()
     options.add_argument('--headless')
-    #options.add_argument('--no-sandbox')
-    #options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     driver.get(siteIPAddress + "/Main")
@@ -40,9 +38,8 @@ def test_wrongFileType_uploadCompanyData():
     #checks if the Upload Data pahe is loaded
     target_title = driver.title
     assert target_title == "DevOps Team 5 Upload Data Page"
-    driver.implicitly_wait(3)
 
-    chooseFile = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
+    chooseFile = driver.find_element("xpath", "//*[@id='company-data-upload']")
     submitButton = driver.find_element("xpath",'//*[@id="upload-data-form"]/input[3]')
 
     driver.implicitly_wait(3)
@@ -52,7 +49,7 @@ def test_wrongFileType_uploadCompanyData():
     chooseFile.send_keys("/home/runner/work/DevOps_Oct2022_Team5_Assignment/DevOps_Oct2022_Team5_Assignment/testFail.csv")
     submitButton.click()
 
-    submitMsg = driver.find_element("xpath", '//*[@id="file-msg"]')
+    submitMsg = driver.find_element("xpath", '//*[@id="file-upload-error-txt"]')
 
     assert submitMsg.text == "Upload Failed. Invalid Format"
 
