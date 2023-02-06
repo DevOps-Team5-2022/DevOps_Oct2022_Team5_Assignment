@@ -49,11 +49,21 @@ jobs:
       - name: list our contents
         run: |
           ls
+      - name: Remove root password
+        run: |
+          sudo /etc/init.d/mysql stop
+          sudo mysqld_safe --skip-grant-tables &
+          mysql -uroot -p"root" -e "use mysql"
+          mysql -uroot -p"root" -e "update user set authentication_string=PASSWORD("mynewpassword") where User='root'"
+          mysql -uroot -p"root" -e "flush privileges"
+          sudo /etc/init.d/mysql stop
+          sudo /etc/init.d/mysql start
+          
       - name: Create DevOps db & tables
         run: |
-          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
-          mysql -u root -p"root" -e "SHOW DATABASES"
-          mysql -u root -p"root" devops < devops.sql
+          mysql -u root -p"mynewpassword" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql -u root -p"mynewpassword" -e "SHOW DATABASES"
+          mysql -u root -p"mynewpassword" devops < devops.sql
           
       - name: Run Flask
         run: |
