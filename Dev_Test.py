@@ -132,3 +132,27 @@ def test_successful_validate_resume_dir():
 
     result = functions.update_directory('resume', "/usr/bin", cursor, conn)
     assert result == 'success'
+
+def test_fail_validate_email_dir():
+        # gets directory from Database
+    cursor.execute("SHOW TABLES LIKE 'config'")
+    checkExists = cursor.fetchall()
+
+    # if table doesnt exist, create table and add demo record
+    if len(checkExists) == 0:
+        functions.init_config_table(conn, cursor)
+        
+    result = functions.update_directory('email', "C:\\Program Files", cursor, conn)
+    assert result == 'error'
+
+def test_fail_validate_resume_dir():
+        # gets directory from Database
+    cursor.execute("SHOW TABLES LIKE 'config'")
+    checkExists = cursor.fetchall()
+
+    # if table doesnt exist, create table and add demo record
+    if len(checkExists) == 0:
+        functions.init_config_table(conn, cursor)
+        
+    result = functions.update_directory('resume', "C:\\Program Files", cursor, conn)
+    assert result == 'error'
