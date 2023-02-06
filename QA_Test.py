@@ -22,6 +22,7 @@ def test_goToMainPage():
     options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
+
     driver.get(siteIPAddress + "/Upload_Data")
 
     #checks if the home pahe is loaded
