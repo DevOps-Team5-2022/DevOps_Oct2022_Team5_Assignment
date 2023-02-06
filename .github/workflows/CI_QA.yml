@@ -30,7 +30,6 @@ jobs:
           sudo apt-get install -y mysql-server
           sudo systemctl start mysql
           sudo systemctl status mysql
-          sudo find / -type s
           
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -52,16 +51,15 @@ jobs:
           ls
       - name: Remove root password
         run: |
-          cd /var/run
-          sudo cp -rp ./mysqld ./mysqld.bak
-          sudo /etc/init.d/mysql stop
-          sudo mv ./mysqld.bak ./mysqld
+          sudo service mysql stop
           sudo mysqld_safe --skip-grant-tables &
-          mysql -u root -p"root"
+          sleep 5
+          mysql -u root <<EOF
           use mysql;
           update user set authentication_string=PASSWORD("mynewpassword") where User='root';
           flush privileges;
-          quit
+          EOF
+          sudo service mysql restart
           
       - name: Create DevOps db & tables
         run: |
