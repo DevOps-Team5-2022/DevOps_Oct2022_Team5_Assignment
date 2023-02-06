@@ -10,6 +10,12 @@ import functions
 import database_crud as db
 import pandas as pd
 from sqlalchemy import create_engine
+import mysql.connector
+
+conn = mysql.connector.connect(user='root', password='root',
+                              host='localhost',database='devops')
+
+cursor = conn.cursor()
 
 chromeOption = options.Options()
 for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-certificate-errors','--disable-extensions','--no-sandbox','--disable-dev-shm-usage']:
@@ -102,4 +108,27 @@ def test_diff_column_upload_company_data():
     result = functions.upload_data_func(companyTestDataframe, 'company', engine)
     assert result == 'error'
 
+# validate that directory exists before saving to database
+def validate_successful_email_directory_path():
+    # gets directory from Database
+    cursor.execute("SHOW TABLES LIKE 'config'")
+    checkExists = cursor.fetchall()
 
+    # if table doesnt exist, create table and add demo record
+    if len(checkExists) == 0:
+        functions.init_config_table(conn, cursor)
+        
+    result = functions.update_directory('email', "/usr/bin", cursor, conn)
+    assert result
+
+def validate_successful_resume_directory_path():
+        # gets directory from Database
+    cursor.execute("SHOW TABLES LIKE 'config'")
+    checkExists = cursor.fetchall()
+
+    # if table doesnt exist, create table and add demo record
+    if len(checkExists) == 0:
+        functions.init_config_table(conn, cursor)
+
+    result = functions.update_directory('resume', "/usr/bin", cursor, conn)
+    assert result  
