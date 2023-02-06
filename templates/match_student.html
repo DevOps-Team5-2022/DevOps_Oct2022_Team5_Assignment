@@ -3,7 +3,7 @@
     <head>
         <title>DevOps Team 5 Match Student Page</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    </head
+    </head>
     <body>
         <header>
             <div class="container">
@@ -21,5 +21,49 @@
         </header>
         <h1 class="title-text">Match Students Page</h1>
         <hr class="title-black-line" />
+        <table border="1" id="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Preference</th>
+                <th>Company List</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+                {% for row in student_data %}
+                    <tr>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>
+                            <select name="{{ loop.index }}" id="test" class="company"  onchange="goPython()">
+                            
+                                <option value="empty"></option>
+                                {% for row in company_data %}
+                                    
+                                    <option value="{{row[1]}}" name="{{ loop.index }}" id="ss">{{row[1]}}</option>
+                                    
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="status" class="status" id="status" onchange="goPython()">
+                                <option value="unassigned">Unassigned</option>
+                                <option value="pendingconfirmation">Pending Confirmation</option>
+                                <option value="confirmed">Confirmed</option>
+                            </select>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            function goPython(){
+                alert(document.getElementById("test").getAttribute("name"));
+                const select = document.getElementsByClassName('company')[0].value;
+                alert(select);
+            }
+        </script>
     </body>
 </html>
