@@ -36,7 +36,11 @@ def upload_data():
             studentExtension = studentData.filename.split(".")[1]
             if studentExtension == "csv" or studentExtension == "xlsx" or studentExtension == "xls": 
                 studentDataDF = pd.read_excel(studentData)
-                msg = upload_data_func(studentDataDF, 'student')
+                #check if uploaded excel is empty
+                if studentDataDF.empty:
+                    msg = 'error'
+                else:
+                    msg = upload_data_func(studentDataDF, 'student')
             else:
                 msg = 'error'
 
@@ -49,7 +53,11 @@ def upload_data():
             companyExtension = companyData.filename.split(".")[1]
             if companyExtension == "csv" or companyExtension == "xlsx" or companyExtension == "xls": 
                 companyDataDF = pd.read_excel(companyData)
-                msg = upload_data_func(companyDataDF, 'company')
+                # check if uploaded excel is empty
+                if companyDataDF.empty:
+                    msg = 'error'
+                else:
+                    msg = upload_data_func(companyDataDF, 'company')
             else:
                 msg = 'error'
                 
