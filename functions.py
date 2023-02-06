@@ -34,6 +34,8 @@ def validate_upload_file(data, fileName, tableName, engine):
             msg = 'error'
         else:
             msg = upload_data_func(dataDF, tableName, engine)
+    else:
+        msg = 'error'
     
     return msg
 
