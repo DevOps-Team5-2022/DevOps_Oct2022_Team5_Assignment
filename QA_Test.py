@@ -16,6 +16,20 @@ companyDataFileName = "companyDataFile.csv"
 print(selenium.__version__)
 
 # Kevin's test cases
+def test_goToMainPage():
+    options = Options()
+    options.add_argument('--headless')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+    driver.quit()
+    
 def test_wrongFileType_uploadCompanyData():
     options = Options()
     options.add_argument('--headless')
