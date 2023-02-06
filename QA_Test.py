@@ -68,7 +68,6 @@ def test_goToUploadDataPage():
 
     driver.quit()
 
-
 #test if clicking the "Prepare Email" button on the nav bar opens the correct oage
 def test_goToPrepareEmailPage():
     options = Options()
@@ -98,7 +97,6 @@ def test_goToPrepareEmailPage():
     assert target_title == "DevOps Team 5 Prepare Email Page"
 
     driver.quit()
-
 
 
 #test if clicking the "Match Student" button on the nav bar opens the correct oage
@@ -161,7 +159,6 @@ def test_goToSettingsPage():
     assert target_title == "DevOps Team 5 Settings Page"
 
     driver.quit()
-
 
 
 #test if student data is uploaded successfully
