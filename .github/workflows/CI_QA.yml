@@ -53,9 +53,9 @@ jobs:
         run: |
           sudo /etc/init.d/mysql stop
           sudo mysqld_safe --skip-grant-tables &
-          use mysql
-          update user set authentication_string=PASSWORD("mynewpassword") where User='root'
-          flush privileges
+          use mysql;
+          update user set authentication_string=PASSWORD("mynewpassword") where User='root';
+          flush privileges;
           quit
           sudo /etc/init.d/mysql stop
           sudo /etc/init.d/mysql start
