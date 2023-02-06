@@ -85,8 +85,8 @@ def init_config_table(conn, cursor):
     conn.commit()
 
 # update config table with new inputted directory
-def update_directory(tableType, directoryPath, cursor, conn):
-    if tableType == "email":
+def update_directory(columnName, directoryPath, cursor, conn):
+    if columnName == "email":
         if os.path.isdir(directoryPath):
             cursor.execute("UPDATE config SET email_path = (%s) WHERE ID = (%s)", (directoryPath, 1))
             conn.commit()
@@ -94,7 +94,7 @@ def update_directory(tableType, directoryPath, cursor, conn):
         else:
             result = 'error'
 
-    elif tableType == "resume":
+    elif columnName == "resume":
         if os.path.isdir(directoryPath):
             cursor.execute("UPDATE config SET resume_path = (%s) WHERE ID = (%s)", (directoryPath, 1))
             conn.commit()
