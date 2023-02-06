@@ -50,9 +50,9 @@ jobs:
           ls
       - name: Create DevOps db & tables
         run: |
-          mysql -u root -p"mynewpassword" -e 'CREATE DATABASE IF NOT EXISTS devops;'
-          mysql -u root -p"mynewpassword" -e "SHOW DATABASES"
-          mysql -u root -p"mynewpassword" devops < devops.sql
+          mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
+          mysql -u root -p"root" -e "SHOW DATABASES"
+          mysql -u root -p"root" devops < devops.sql
           
       - name: Run Flask
         run: |
