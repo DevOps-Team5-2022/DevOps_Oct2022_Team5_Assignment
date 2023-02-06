@@ -54,7 +54,7 @@ jobs:
       - name: list our contents
         run: |
           ls
-          readlink -f main.py
+          readlink -f testFail.csv
       - name: Run Flask
         run: |
           sudo systemctl status mysql
