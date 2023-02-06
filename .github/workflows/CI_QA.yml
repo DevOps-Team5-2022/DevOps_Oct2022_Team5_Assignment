@@ -45,15 +45,16 @@ jobs:
           git checkout remotes/origin/DevBranch Email.py
           git checkout remotes/origin/DevBranch templates
           git checkout remotes/origin/DevBranch static/css
-      - name: list our contents
-        run: |
-          ls
       - name: Create DevOps db & tables
         run: |
           mysql -u root -p"root" -e 'CREATE DATABASE IF NOT EXISTS devops;'
           mysql -u root -p"root" -e "SHOW DATABASES"
           mysql -u root -p"root" devops < devops.sql
-          
+      
+      - name: list our contents
+        run: |
+          ls
+          readlink -f main.py
       - name: Run Flask
         run: |
           sudo systemctl status mysql
