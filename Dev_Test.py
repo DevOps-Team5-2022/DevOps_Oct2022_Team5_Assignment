@@ -119,7 +119,7 @@ def validate_successful_email_directory_path():
         functions.init_config_table(conn, cursor)
         
     result = functions.update_directory('email', "/usr/bin", cursor, conn)
-    assert result
+    assert result == 'success'
 
 def validate_successful_resume_directory_path():
         # gets directory from Database
@@ -131,4 +131,4 @@ def validate_successful_resume_directory_path():
         functions.init_config_table(conn, cursor)
 
     result = functions.update_directory('resume', "/usr/bin", cursor, conn)
-    assert result  
+    assert result == 'success'
