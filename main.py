@@ -31,18 +31,28 @@ def upload_data():
     if request.method == 'POST':
         studentData = request.files['student-data-upload']
         companyData = request.files['company-data-upload']
-        print(studentData)
         if studentData.filename != '':
-            studentDataDF = pd.read_excel(studentData)
-            msg = upload_data_func(studentDataDF, 'student')
+            # check that file is an Excel file
+            studentExtension = studentData.filename.split(".")[1]
+            if studentExtension == "csv" or studentExtension == "xlsx" or studentExtension == "xls": 
+                studentDataDF = pd.read_excel(studentData)
+                msg = upload_data_func(studentDataDF, 'student')
+            else:
+                msg = 'error'
+
             if msg == 'success':
                 sDataSuccess = True
             else:
                 sDataSuccess = False
             
         if companyData.filename != '':
-            companyDataDF = pd.read_excel(companyData)
-            msg = upload_data_func(companyDataDF, 'company')
+            companyExtension = companyData.filename.split(".")[1]
+            if companyExtension == "csv" or companyExtension == "xlsx" or companyExtension == "xls": 
+                companyDataDF = pd.read_excel(companyData)
+                msg = upload_data_func(companyDataDF, 'company')
+            else:
+                msg = 'error'
+                
             if msg == 'success':
                 cDataSuccess = True
             else:
