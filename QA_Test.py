@@ -16,12 +16,6 @@ companyDataFileName = "companyDataFile.csv"
 
 print(selenium.__version__)
 
-chromeOption = options.Options()
-for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-certificate-errors','--disable-extensions','--no-sandbox','--disable-dev-shm-usage']:
-    chromeOption.add_argument(option)
-
-driver = webdriver.Chrome(options = chromeOption)
-
 # Kevin's test cases
 def test_goToMainPage():
     options = Options()
@@ -36,6 +30,9 @@ def test_goToMainPage():
     driver.quit()
     
 def test_wrongFileType_uploadCompanyData():
+    options = Options()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     driver.get(siteIPAddress + "/Upload_Data")
 
     #checks if the Upload Data pahe is loaded
