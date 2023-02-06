@@ -16,6 +16,47 @@ companyDataFileName = "companyDataFile.csv"
 
 print(selenium.__version__)
 
+# Kevin's test cases
+def test_goToMainPage():
+    options = Options()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+
+    driver.get(siteIPAddress + "/Main")
+
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Home Page"
+    driver.quit()
+    
+def test_wrongFileType_uploadCompanyData():
+    options = Options()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
+
+    driver.get(siteIPAddress + "/Upload_Data")
+
+    #checks if the Upload Data pahe is loaded
+    target_title = driver.title
+    assert target_title == "DevOps Team 5 Upload Data Page"
+
+    chooseFile = driver.find_element("xpath", "//*[@id='company-data-upload']")
+    submitButton = driver.find_element("xpath",'//*[@id="upload-data-form"]/input[3]')
+
+    driver.implicitly_wait(3)
+
+    #chooseFile.send_keys("C:/Users/imsam/Downloads/GPA_sample_calculation_v1.xls")
+    #chooseFile.send_keys("C:/Users/imsam/Downloads/companyDataFile.csv")
+    chooseFile.send_keys("/home/runner/work/DevOps_Oct2022_Team5_Assignment/DevOps_Oct2022_Team5_Assignment/testFail.csv")
+    submitButton.click()
+
+    submitMsg = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
+
+    assert submitMsg.text == "Upload Failed. Invalid Format"
+
+    driver.quit()
+
+# Samuel's Test cases
 #get student info from student data file:
 def getStudentInfo(studentData):
     students = []
