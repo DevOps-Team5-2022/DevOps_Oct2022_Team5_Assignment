@@ -39,8 +39,20 @@ def test_wrongFileType_uploadCompanyData():
     #checks if the home pahe is loaded
     title = driver.title
     assert title == "DevOps Team 5 Upload Data Page"
-
     
+    chooseFile = driver.find_element("xpath", "//*[@id='company-data-upload']")
+    submitButton = driver.find_element("xpath",'//*[@id="upload-data-form"]/input[3]')
+
+    driver.implicitly_wait(3)
+
+    #chooseFile.send_keys("C:/Users/imsam/Downloads/GPA_sample_calculation_v1.xls")
+    #chooseFile.send_keys("C:/Users/imsam/Downloads/companyDataFile.csv")
+    chooseFile.send_keys("/home/runner/work/DevOps_Oct2022_Team5_Assignment/DevOps_Oct2022_Team5_Assignment/testFail.csv")
+    submitButton.click()
+
+    submitMsg = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
+
+    assert submitMsg.text == "Upload Failed. Invalid Format"
 
     driver.quit()
 
