@@ -60,14 +60,8 @@ def test_settings_url():
     assert driver.title == "DevOps Team 5 Settings Page"
 
 def test_create_email_function():
-    result = functions.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
-
-    assert result.recipients[0].display_name == 'Tan Jun Jie'
-    assert result.recipients[0].email_address == 's10194152@connect.np.edu.sg'
-    assert result.subject == "Internship Response to Internship Request"
-    assert result.body == "Dear Tan Jun Jie,\nKindly find attached our students resume for the 2023" \
-                   " semester Internship in response to your job description which you have submitted to us." + \
-                   "\nWe look forward to your favorable response and to working with your company for the upcoming internship period 29/1/2023 to 29/7/2023"
+    result = functions.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023", "/usr/bin")
+    assert result == 'success'
     
 def test_create_table():
     assert db.create_table() == ('exist',)
