@@ -6,9 +6,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os.path
 from os import environ
 import main
-import Email
+import functions
 import database_crud as db
 import pandas as pd
+from sqlalchemy import create_engine
 
 chromeOption = options.Options()
 for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-certificate-errors','--disable-extensions','--no-sandbox','--disable-dev-shm-usage']:
@@ -16,6 +17,8 @@ for option in ['--headless','--disable-gpu','--window-size=1920,1200','--ignore-
 
 driver = webdriver.Chrome(options = chromeOption)
 
+engine = create_engine("mysql://{user}:{pw}@{host}/{db}"
+				.format(host='localhost', db='devops', user='root', pw='root'))
 
 def test_home_url():
     
@@ -51,7 +54,7 @@ def test_settings_url():
     assert driver.title == "DevOps Team 5 Settings Page"
 
 def test_create_email_function():
-    result = Email.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
+    result = functions.create_email("s10194152@connect.np.edu.sg", "Tan Jun Jie", "29/1/2023", "29/7/2023")
 
     assert result.recipients[0].display_name == 'Tan Jun Jie'
     assert result.recipients[0].email_address == 's10194152@connect.np.edu.sg'
@@ -78,25 +81,25 @@ def test_delete_table():
 def test_successful_upload_student_data():
     studentTestData = {'StudentID': ["S87654321A"], 'Name': ['Test1'], 'Preference': ['Testing'], 'Status': ['Unassigned']}
     studentTestDataframe = pd.DataFrame(data = studentTestData)
-    result = main.upload_data_func(studentTestDataframe, 'student')
+    result = functions.upload_data_func(studentTestDataframe, 'student', engine)
     assert result == 'success'
 
 def test_successful_upload_company_data():
     companyTestData = {'CompanyName': ["Test Company"], 'JobRole': ['Tester'], 'CompanyContact': ['Test User'], 'Email': ['test@gmail.com']}
     companyTestDataframe = pd.DataFrame(data = companyTestData)
-    result = main.upload_data_func(companyTestDataframe, 'company')
+    result = functions.upload_data_func(companyTestDataframe, 'company', engine)
     assert result == 'success'
 
 def test_diff_column_upload_student_data():
     studentTestData = {'student id': ["S87654321A"], 'name': ['Test1'], 'preference': ['Testing'], 'status': ['Unassigned']}
     studentTestDataframe = pd.DataFrame(data = studentTestData)
-    result = main.upload_data_func(studentTestDataframe, 'student')
+    result = functions.upload_data_func(studentTestDataframe, 'student', engine)
     assert result == 'error'
 
 def test_diff_column_upload_company_data():
     companyTestData = {'company name': ["Test Company"], 'job role': ['Tester'], 'company contact': ['Test User'], 'email': ['test@gmail.com']}
     companyTestDataframe = pd.DataFrame(data = companyTestData)
-    result = main.upload_data_func(companyTestDataframe, 'company')
+    result = functions.upload_data_func(companyTestDataframe, 'company', engine)
     assert result == 'error'
 
 
