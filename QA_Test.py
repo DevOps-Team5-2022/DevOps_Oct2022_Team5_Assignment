@@ -22,7 +22,6 @@ def test_goToMainPage():
     options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
-
     driver.get(siteIPAddress + "/Upload_Data")
 
     #checks if the home pahe is loaded
@@ -35,23 +34,13 @@ def test_wrongFileType_uploadCompanyData():
     options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
-    driver.get(siteIPAddress + "/Main")
+    driver.get(siteIPAddress + "/Upload_Data")
 
-    #checks if the Upload Data pahe is loaded
-    target_title = driver.title
-    assert target_title == "DevOps Team 5 Upload Data Page"
+    #checks if the home pahe is loaded
+    title = driver.title
+    assert title == "DevOps Team 5 Upload Data Page"
 
-    chooseFile = driver.find_element("xpath", "//*[@id='company-data-upload']")
-    submitButton = driver.find_element("xpath",'//*[@id="upload-data-form"]/input[3]')
-
-    #chooseFile.send_keys("C:/Users/imsam/Downloads/GPA_sample_calculation_v1.xls")
-    #chooseFile.send_keys("C:/Users/imsam/Downloads/companyDataFile.csv")
-    chooseFile.send_keys("/home/runner/work/DevOps_Oct2022_Team5_Assignment/DevOps_Oct2022_Team5_Assignment/testFail.csv")
-    submitButton.click()
-
-    submitMsg = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
-
-    assert submitMsg.text == "Upload Failed. Invalid Format"
+    
 
     driver.quit()
 
@@ -463,7 +452,7 @@ def test_uploadCompanyData():
 
     driver.quit()
     
-def test_wrongFileType_uploadCompanyData():
+def test_failuploadCompany():
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
     driver.get(siteIPAddress + "/Upload_Data")
