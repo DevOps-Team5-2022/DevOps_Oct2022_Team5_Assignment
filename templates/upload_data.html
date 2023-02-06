@@ -23,9 +23,9 @@
         <h1 class="title-text">Upload Data Page</h1>
         <hr class="title-black-line" />
         {% if result == "error" %}
-        <p style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
+        <p id="file-msg" style="color: white; background-color: red; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left:20px; margin-left: 50px;">Upload Failed. Invalid Format</p>
         {% elif result == "success" %}
-        <p style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
+        <p id="file-msg" style="color: white; background-color: green; border-radius: 5px; width: 680px; height: 40px; line-height: 40px; padding-left: 20px; margin-left: 50px;">Upload Successful!</p>
         {% endif %}
 
 
