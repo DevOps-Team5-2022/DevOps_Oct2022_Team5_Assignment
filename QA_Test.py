@@ -49,7 +49,7 @@ def test_wrongFileType_uploadCompanyData():
     chooseFile.send_keys("/home/runner/work/DevOps_Oct2022_Team5_Assignment/DevOps_Oct2022_Team5_Assignment/testFail.csv")
     submitButton.click()
 
-    submitMsg = driver.find_element("xpath", '//*[@id="file-upload-error-txt"]')
+    submitMsg = driver.find_element("xpath", "//*[@id='file-upload-error-txt']")
 
     assert submitMsg.text == "Upload Failed. Invalid Format"
 
