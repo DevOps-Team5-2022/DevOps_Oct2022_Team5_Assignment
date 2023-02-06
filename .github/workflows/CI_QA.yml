@@ -48,18 +48,6 @@ jobs:
       - name: list our contents
         run: |
           ls
-      - name: Remove root password
-        run: |
-          sudo service mysql stop
-          sudo mysqld_safe --skip-grant-tables &
-          sleep 5
-          mysql -u root <<EOF
-          use mysql;
-          update user set authentication_string=PASSWORD("mynewpassword") where User='root';
-          flush privileges;
-          EOF
-          sudo service mysql restart
-          
       - name: Create DevOps db & tables
         run: |
           mysql -u root -p"mynewpassword" -e 'CREATE DATABASE IF NOT EXISTS devops;'
