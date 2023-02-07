@@ -150,3 +150,17 @@ def test_fail_validate_resume_dir():
         
     result = functions.update_directory('resume', "C:\\Program Files", cursor, conn)
     assert result == 'error'
+	
+def test_input_internperiod_string():
+	if(typeOf startDate) != string:
+		check = true
+	else:
+		check = false
+	assert check == true
+
+def test_input_invalid_internperiod_string():
+	if(typeOf startDate) != string:
+		check = true
+	else:
+		check = false
+	assert check == false
