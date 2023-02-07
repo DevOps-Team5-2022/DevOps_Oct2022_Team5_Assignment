@@ -138,3 +138,7 @@ def create_email(email, recipientName, beforeDate, afterDate, filePath):
     else:
         return "success"
 
+#dropdown for 
+def dropdown_company():
+    list = conn.execute("SELECT  FROM company data")
+
