@@ -138,7 +138,12 @@ def create_email(email, recipientName, beforeDate, afterDate, filePath):
     else:
         return "success"
 
-#dropdown for 
+#dropdown for company in upload data page
 def dropdown_company():
     list = conn.execute("SELECT  FROM company data")
+    return list
 
+#dropdown for status in upload data page
+def dropdown_status():
+    status = ["Unassigned", "Pending confirmation", "Confirmed"]
+    return status
