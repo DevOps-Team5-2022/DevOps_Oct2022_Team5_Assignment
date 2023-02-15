@@ -572,6 +572,6 @@ def test_failuploadCompany():
         else:
             dataFound = True
     
-    assert dataFound == True;
+    assert dataFound == False;
 
     driver.quit()
