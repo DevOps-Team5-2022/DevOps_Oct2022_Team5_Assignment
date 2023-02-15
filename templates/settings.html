@@ -18,6 +18,7 @@
                 <strong>
                     <nav>
                         <ul class="menu">
+                            <li><a href="{{ url_for('home') }}">Home</a></li>
                             <li><a href="{{ url_for('upload_data') }}">Upload Data</a></li>
                             <li><a href="{{ url_for('match_student') }}">Match Students</a></li>
                             <li><a href="{{ url_for('prepare_email') }}">Prepare Emails</a></li>
@@ -29,79 +30,115 @@
         </header>
         <h1 class="title-text">Change Settings</h1>
         <hr class="title-black-line" />
+
+
         <div style="display: flex; flex-direction: column;">
 
             <!-- Email Directory Field-->
             <div style="display: flex; margin-left: 50px; padding-top:25px; flex-direction:column">
-                <div class="settings-bordered-box">
-                    <i class="fa fa-folder" style="font-size: 50px; padding-top: 2px; padding-left: 10px; padding-right: 20px" onclick="showCurrentEmailDir()"></i>
-                    <form method="post" style="display:flex; flex-direction:row;">
-                        {% if emailPath == ""%}
-                            <input type="text" id="input-email-dir" name="input-email-dir" placeholder="File Directory"/>
-                        {% else %}
-                            <input type="text" id="input-email-dir" name="input-email-dir" placeholder={{emailPath}} />
-                        {% endif %}
-                        <input type="submit" id="submit-email-dir-btn" name="submit-email-dir-btn" value="Email Directory"/>
-                    </form>
+                <div style="display: flex; flex-direction: row;">
+                    <div class="settings-bordered-box">
+                        <i class="fa fa-folder" style="font-size: 50px; padding-top: 2px; padding-left: 10px; padding-right: 20px" onclick="showCurrentEmailDir()"></i>
+                        <form method="post" id="email-dir-form" style="display:flex; flex-direction:row;">
+                            <input type="text" id="input-email-dir" name="input-email-dir" placeholder="e.g. C:\\Documents\Email" />
+                            <input type="submit" id="submit-email-dir-btn" name="submit-email-dir-btn" value="Email Directory" />
+                        </form>
+                    </div>
+
+                    <!--Message upon user input-->
+                    {% if check[0] %}
+                    {% if valid[0] %}
+                    <p style="margin-top: 16px; max-height: 5px; margin-left: 180px; color: forestgreen;">Successfully Configured!</p>
+                    {% else %}
+                    <p style="margin-top: 16px; max-height: 5px; margin-left: 180px; color: red;">Invalid Directory. Please re-enter a valid directory</p>
+                    {% endif %}
+                    {% endif %}
                 </div>
-                <p id="currentEmailDirText" style="margin-top: 5px; max-height: 5px"><em>Current Email Directory: {{emailPath}}</em></p>
-            </div>  
+
+                <p class="info-text" id="current-email-dir-txt"><em>Current Email Directory: {{emailPath}}</em></p>
+            </div>
 
             <!-- Resume Directory Field -->
             <div style="display: flex; margin-left: 50px; padding-top: 10px; flex-direction:column;">
-                <div class="settings-bordered-box">
-                    <i class="fa fa-folder" style="font-size: 50px; padding-top: 2px; padding-left: 10px; padding-right: 20px" onclick="showCurrentResumeDir()"></i>
-                    <form method="post" style="display:flex; flex-direction:row;">
-                        {% if resumePath == ""%}
-                            <input type="text" id="input-resume-dir" name="input-resume-dir" placeholder="File Directory" />
-                        {% else %}
-                            <input type="text" id="input-resume-dir" name="input-resume-dir" placeholder={{resumePath}} />
-                        {% endif %}
-                        <input type="submit" id="submit-resume-dir-btn" name="submit-resume-dir-btn" value="Resume Directory" />
-                    </form>
+                <div style="display: flex; flex-direction: row;">
+                    <div class="settings-bordered-box">
+                        <i class="fa fa-folder" style="font-size: 50px; padding-top: 2px; padding-left: 10px; padding-right: 20px" onclick="showCurrentResumeDir()"></i>
+                        <form method="post" id="resume-dir-form" style="display:flex; flex-direction:row;">
+                            <input type="text" id="input-resume-dir" name="input-resume-dir" placeholder="e.g. C:\\Documents\Resume" />
+                            <input type="submit" id="submit-resume-dir-btn" name="submit-resume-dir-btn" value="Resume Directory" />
+                        </form>
+                    </div>
+
+                    <!--Message upon user input-->
+                    {% if check[1] %}
+                    {% if valid[1] %}
+                    <p style="margin-top: 16px; max-height: 5px; margin-left: 180px; color: forestgreen;">Successfully Configured!</p>
+                    {% else %}
+                    <p style="margin-top: 16px; max-height: 5px; margin-left: 180px; color: red;">Invalid Directory. Please re-enter a valid directory</p>
+                    {% endif %}
+                    {% endif %}
                 </div>
-                {% if resumePath == ""%}
-                    <p id="currentResumeDirText" style="margin-top: 5px; max-height: 5px"><em>Current Resume Directory: -</em></p>
-                {% else %}
-                    <p id="currentResumeDirText" style="margin-top: 5px; max-height: 5px"><em>Current Resume Directory: {{resumePath}}</em></p>
-                {% endif %}
+
+                <p class="info-text" id="current-resume-dir-txt"><em>Current Resume Directory: {{resumePath}}</em></p>
             </div>
 
             <!-- Internship Period Field-->
-            <div style="display: flex; margin-left: 50px; padding-top: 10px;">
+            <div style="display: flex; margin-left: 50px; padding-top: 25px; flex-direction: column">
+                <b style="font-size:large">Internship Period:</b>
                 <div class="settings-bordered-box">
-                    <form style="display: flex; flex-direction: row">
-                        <input type="text" id="internship-period" name="internship-period" style="margin-left: -1px; width: 490px; text-align:center; font-size:x-large;"/>
+                    <form method="post" style="display: flex; flex-direction: row">
+                        <input type="text" id="internship-period" name="internship-period" style="margin-left: -1px; width: 488px; text-align: center; font-size: x-large; background-color: transparent; cursor: pointer;" />
+                        <input type="submit" id="submit-internship-period-btn" name="submit-internship-period-btn" value="Submit" disabled />
+                        <input type="hidden" id="inputted-start-date" name="inputted-start-date" />
+                        <input type="hidden" id="inputted-end-date" name="inputted-end-date" />
                     </form>
+                    <i class="fa fa-angle-down" style="font-size: 50px; margin-left: -215px; z-index: -1;"></i>
                 </div>
+
+                <p class="info-text" id="current-internship-period-text"><em>Current Internship Period: <u>{{ startDate}}</u> to <u>{{ endDate }}</u></em></p>
             </div>
         </div>
 
-        <!--For Testing getting File path through opening File Dialog-->
-        <br /><br /><br /><br />
-        <form method="post">
-            <input type="file" name="test-file" id="test-file" />
-            <input type="submit" />
-        </form>
-        <!--End-->
-
         <script>
             // For Date Range Picker
+            const date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            let currentDate = day + '/' + month + '/' + year;
+            console.log(currentDate)
+
+            let currentStartDate = {{ startDate | tojson }};
+            let currentEndDate = {{ endDate | tojson }};
+            console.log("Test 1: " + currentStartDate + " and type: " + typeof currentStartDate);
+            console.log("Test 2: " + currentEndDate + " and type: " + typeof currentEndDate);
+
             $(function dateRangePicker() {
                 $('input[id="internship-period"]').daterangepicker({
-                    opens: 'left',
+                    opens: 'center',
                     "locale": {
-                        "format": "DD/MM/YYYY"
+                        "startDate": currentStartDate,
+                        "endDate": currentEndDate,
+                        "format": "DD/MM/YYYY",
+                        "minDate": currentDate
                     }
                 }, function (start, end, label) {
                     console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+                    let selectedStartDay = Number(start.format('DD'));
+                    let selectedStartMonth = Number(start.format('MM'));
+                    let selectedStartYear = Number(start.format('YYYY'));
+
+                    if (selectedStartYear < year || ((selectedStartYear === year) && (selectedStartMonth < month)) || (selectedStartYear === year) && (selectedStartMonth === month) && (selectedStartDay < day)) {
+                        alert("Invalid Starting Date choosen. Please re-select starting date")
+                        document.getElementById('submit-internship-period-btn').disabled = true;
+                    }
+                    else {
+                        document.getElementById('inputted-start-date').value = start.format('YYYY-MM-DD')
+                        document.getElementById('inputted-end-date').value = end.format('YYYY-MM-DD')
+                        document.getElementById('submit-internship-period-btn').disabled = false;
+                    }
                 });
             });
-
-            $('#test-file').change(function (e) {
-                // gets fakepath (not working properly)
-                console.log($(this).val())
-            })
         </script>
     </body>
 </html>
