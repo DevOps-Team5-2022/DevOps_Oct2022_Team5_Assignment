@@ -4,8 +4,8 @@ DevOps 2022 Assignment Repo for Team 5
 ### Team Roles & Responsibilies
 |Role|Member|Role Responsibilities|
 --- | --- | ---|
-|Scrum Master & QA|Kevin|Organize the team, does SCRUM & Sprint documentation|
-|Lead Developer|Elgin|Manages the code for the team, is the gatekeeper for releases|
+|Scrum Master & QA|Kevin|Organize Team Meetings, manages the overall project. Sets the length of sprint. Together with Tech Lead manage which user story to add in to sprint backlog. Develop yaml file. Assist code review with Tech Lead.|
+|Lead Developer|Elgin|Understands all the technologies used in the project. Will manage the developers and assign on what user stories the team should complete on each sprint. Monitor progress for project and assist with code review together with Scrum Master|
 |Quality Assurance|Samuel|Manages the system testing and overall completness of unit tests and automated testing|
 |Developer|Tricia|Manages the overall development of the solution. Writes unit test cases|
 |Developer|Jun Jie|Manages the overall development of the solution Writes unit test cases|
